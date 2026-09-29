@@ -1,0 +1,4719 @@
+[
+ {
+  "group": "User API Calls",
+  "title": "Status",
+  "path": "/api/status",
+  "permission": "None",
+  "params": []
+ },
+ {
+  "group": "User API Calls",
+  "title": "Login",
+  "path": "/api/user/login",
+  "permission": "None",
+  "params": [
+   {
+    "name": "user",
+    "optional": false,
+    "description": "The username for the user account. The built-in administrator username on the DNS server is `admin`."
+   },
+   {
+    "name": "pass",
+    "optional": false,
+    "description": "The password for the user account. The default password for `admin` user is `admin`."
+   },
+   {
+    "name": "totp",
+    "optional": true,
+    "description": "The time-based one-time password for the user account if it has Two Factor Authentication (2FA) enabled."
+   },
+   {
+    "name": "includeInfo",
+    "optional": true,
+    "description": "Includes basic info relevant for the user in response."
+   }
+  ]
+ },
+ {
+  "group": "User API Calls",
+  "title": "Create API Token",
+  "path": "/api/user/createToken",
+  "permission": "None",
+  "params": [
+   {
+    "name": "user",
+    "optional": true,
+    "description": "The username for the user account for which to generate the API token."
+   },
+   {
+    "name": "pass",
+    "optional": true,
+    "description": "The password for the user account."
+   },
+   {
+    "name": "totp",
+    "optional": true,
+    "description": "The time-based one-time password for the user account if it has Two Factor Authentication (2FA) enabled."
+   },
+   {
+    "name": "tokenName",
+    "optional": false,
+    "description": "The name of the created token to identify its session."
+   }
+  ]
+ },
+ {
+  "group": "User API Calls",
+  "title": "Create Single Use API Token",
+  "path": "/api/user/createSingleUseToken",
+  "permission": "none",
+  "params": []
+ },
+ {
+  "group": "User API Calls",
+  "title": "Logout",
+  "path": "/api/user/logout",
+  "permission": "None",
+  "params": []
+ },
+ {
+  "group": "User API Calls",
+  "title": "Get Session Info",
+  "path": "/api/user/session/get",
+  "permission": "None",
+  "params": []
+ },
+ {
+  "group": "User API Calls",
+  "title": "Delete User Session",
+  "path": "/api/user/session/delete",
+  "permission": "None",
+  "params": [
+   {
+    "name": "partialToken",
+    "optional": false,
+    "description": "The partial token as returned by the user profile details API call."
+   }
+  ]
+ },
+ {
+  "group": "User API Calls",
+  "title": "Change Password",
+  "path": "/api/user/changePassword",
+  "permission": "None",
+  "params": [
+   {
+    "name": "pass",
+    "optional": false,
+    "description": "The current password for the currently logged in user."
+   },
+   {
+    "name": "newPass",
+    "optional": false,
+    "description": "The new password to be set for the currently logged in user."
+   },
+   {
+    "name": "totp",
+    "optional": true,
+    "description": "The 6-digit code from the authenticator app if the user has 2FA enabled."
+   },
+   {
+    "name": "iterations",
+    "optional": true,
+    "description": "The number of iterations for PBKDF2 SHA256 password hashing."
+   }
+  ]
+ },
+ {
+  "group": "User API Calls",
+  "title": "Initialize 2FA",
+  "path": "/api/user/2fa/init",
+  "permission": "None",
+  "params": []
+ },
+ {
+  "group": "User API Calls",
+  "title": "Enable 2FA",
+  "path": "/api/user/2fa/enable",
+  "permission": "None",
+  "params": [
+   {
+    "name": "totp",
+    "optional": false,
+    "description": "The 6-digit code from the authenticator app."
+   }
+  ]
+ },
+ {
+  "group": "User API Calls",
+  "title": "Disable 2FA",
+  "path": "/api/user/2fa/disable",
+  "permission": "None",
+  "params": []
+ },
+ {
+  "group": "User API Calls",
+  "title": "Get User Profile Details",
+  "path": "/api/user/profile/get",
+  "permission": "None",
+  "params": []
+ },
+ {
+  "group": "User API Calls",
+  "title": "Set User Profile Details",
+  "path": "/api/user/profile/set",
+  "permission": "None",
+  "params": [
+   {
+    "name": "displayName",
+    "optional": true,
+    "description": "The display name to set for the user account. For SSO users, the display name is managed by SSO provider and cannot be changed with this API call."
+   },
+   {
+    "name": "sessionTimeoutSeconds",
+    "optional": true,
+    "description": "The session timeout value to set in seconds for the user account."
+   }
+  ]
+ },
+ {
+  "group": "User API Calls",
+  "title": "Check For Update",
+  "path": "/api/user/checkForUpdate",
+  "permission": "None",
+  "params": []
+ },
+ {
+  "group": "Dashboard API Calls",
+  "title": "Get Stats",
+  "path": "/api/dashboard/stats/get",
+  "permission": "Dashboard: View",
+  "params": [
+   {
+    "name": "type",
+    "optional": true,
+    "description": "The duration type for which valid values are: [`LastHour`, `LastDay`, `LastWeek`, `LastMonth`, `LastYear`, `Custom`]. Default value is `LastHour`."
+   },
+   {
+    "name": "utc",
+    "optional": true,
+    "description": "Set to `true` to return the main chart data with labels in UTC date time format using which the labels can be converted into local time for display using the received `labelFormat`."
+   },
+   {
+    "name": "dontTrimQueryTypeData",
+    "optional": true,
+    "description": "Set to `true` to get full data for query type chart instead of top 10 entries. Default value is `false` when unspecified."
+   },
+   {
+    "name": "start",
+    "optional": true,
+    "description": "The start date in ISO 8601 format. Applies only to `custom` type."
+   },
+   {
+    "name": "end",
+    "optional": true,
+    "description": "The end date in ISO 8601 format. Applies only to `custom` type."
+   }
+  ]
+ },
+ {
+  "group": "Dashboard API Calls",
+  "title": "Get Top Stats",
+  "path": "/api/dashboard/stats/getTop",
+  "permission": "Dashboard: View",
+  "params": [
+   {
+    "name": "type",
+    "optional": true,
+    "description": "The duration type for which valid values are: [`LastHour`, `LastDay`, `LastWeek`, `LastMonth`, `LastYear`, `custom`]. Default value is `LastHour`."
+   },
+   {
+    "name": "start",
+    "optional": true,
+    "description": "The start date in ISO 8601 format. Applies only to `custom` type."
+   },
+   {
+    "name": "end",
+    "optional": true,
+    "description": "The end date in ISO 8601 format. Applies only to `custom` type."
+   },
+   {
+    "name": "statsType",
+    "optional": false,
+    "description": "The stats type for which valid values are : [`TopClients`, `TopDomains`, `TopBlockedDomains`]"
+   },
+   {
+    "name": "limit",
+    "optional": true,
+    "description": "The limit of records to return. Default value is `1000`."
+   },
+   {
+    "name": "noReverseLookup",
+    "optional": true,
+    "description": "Set to `true` to disable reverse lookup for Top Clients list. This option is only applicable with `TopClients` stats type."
+   },
+   {
+    "name": "onlyRateLimitedClients",
+    "optional": true,
+    "description": "Set to `true` to list only clients which are being rate limited in the Top Clients list. This option is only applicable with `TopClients` stats type."
+   }
+  ]
+ },
+ {
+  "group": "Dashboard API Calls",
+  "title": "Delete All Stats",
+  "path": "/api/dashboard/stats/deleteAll",
+  "permission": "Dashboard: Delete",
+  "params": []
+ },
+ {
+  "group": "Authoritative Zone API Calls",
+  "title": "List Zones",
+  "path": "/api/zones/list",
+  "permission": "Zones: View\\",
+  "params": [
+   {
+    "name": "filterName",
+    "optional": true,
+    "description": "The string to use to filter zones by name. The filter string can use `*` as wildcard option to select zero or more characters, and `?` option to select exactly one wildcard character. The filter name can be a string in u"
+   },
+   {
+    "name": "filterType",
+    "optional": true,
+    "description": "The zone type to filter. Valid options are [`Primary`, `Secondary`, `Stub`, `Forwarder`, `SecondaryForwarder`, `Catalog`, `SecondaryCatalog`]."
+   },
+   {
+    "name": "pageNumber",
+    "optional": true,
+    "description": "When this parameter is specified, the API will return paginated results based on the page number and zones per pages options. When not specified, the API will return a list of all zones."
+   },
+   {
+    "name": "zonesPerPage",
+    "optional": true,
+    "description": "The number of zones per page to be returned. This option is only used when `pageNumber` options is specified. The default value is `10` when not specified."
+   }
+  ]
+ },
+ {
+  "group": "Authoritative Zone API Calls",
+  "title": "List Catalog Zones",
+  "path": "/api/zones/catalogs/list",
+  "permission": "Zones: View\\",
+  "params": []
+ },
+ {
+  "group": "Authoritative Zone API Calls",
+  "title": "Create Zone",
+  "path": "/api/zones/create",
+  "permission": "Zones: Modify",
+  "params": [
+   {
+    "name": "zone",
+    "optional": false,
+    "description": "The domain name for creating the new zone. The value can be valid domain name, an IP address, or an network address in CIDR format. When value is IP address or network address, a reverse zone is created."
+   },
+   {
+    "name": "type",
+    "optional": false,
+    "description": "The type of zone to be created. Valid values are [`Primary`, `Secondary`, `Stub`, `Forwarder`, `SecondaryForwarder`, `Catalog`, `SecondaryCatalog`]."
+   },
+   {
+    "name": "catalog",
+    "optional": true,
+    "description": "The name of the catalog zone to become its member zone. This option is valid only for `Primary`, `Secondary`, `Stub`, and `Forwarder` zones."
+   },
+   {
+    "name": "useSoaSerialDateScheme",
+    "optional": true,
+    "description": "Set value to `true` to enable using date scheme for SOA serial. This optional parameter is used only with `Primary`, `Forwarder`, and `Catalog` zones. Default value is `false`."
+   },
+   {
+    "name": "primaryNameServerAddresses",
+    "optional": true,
+    "description": "List of comma separated IP addresses or domain names of the primary name server. This optional parameter is used only with `Secondary`, `SecondaryForwarder`, `SecondaryCatalog`, and `Stub` zones. If this parameter is not"
+   },
+   {
+    "name": "zoneTransferProtocol",
+    "optional": true,
+    "description": "The zone transfer protocol to be used by `Secondary`, `SecondaryForwarder`, and `SecondaryCatalog` zones. Valid values are [`Tcp`, `Tls`, `Quic`]."
+   },
+   {
+    "name": "tsigKeyName",
+    "optional": true,
+    "description": "The TSIG key name to be used by `Secondary`, `SecondaryForwarder`, and `SecondaryCatalog` zones."
+   },
+   {
+    "name": "validateZone",
+    "optional": true,
+    "description": "Set value as `true` to enable ZONEMD validation. When enabled, the `Secondary` zone will be validated using the ZONEMD record after every zone transfer. The zone will get disabled if the validation fails. The zone must b"
+   },
+   {
+    "name": "initializeForwarder",
+    "optional": true,
+    "description": "Set value as `true` to initialize the Conditional Forwarder zone with an FWD record or set it to `false` to create an empty `Forwarder` zone. Default value is `true`."
+   },
+   {
+    "name": "protocol",
+    "optional": true,
+    "description": "The DNS transport protocol to be used by the Conditional Forwarder zone. This optional parameter is used with Conditional Forwarder zones. Valid values are [`Udp`, `Tcp`, `Tls`, `Https`, `Quic`]. Default `Udp` protocol i"
+   },
+   {
+    "name": "forwarder",
+    "optional": true,
+    "description": "The address of the DNS server to be used as a forwarder. This optional parameter is required to be used with Conditional Forwarder zones. A special value `this-server` can be used as a forwarder which when used will forw"
+   },
+   {
+    "name": "dnssecValidation",
+    "optional": true,
+    "description": "Set this boolean value to indicate if DNSSEC validation must be done. This optional parameter is required to be used with Conditional Forwarder zones. The `initializeForwarder` parameter must be set to `true` to use this"
+   },
+   {
+    "name": "proxyType",
+    "optional": true,
+    "description": "The type of proxy that must be used for conditional forwarding. This optional parameter is required to be used with Conditional Forwarder zones. Valid values are [`NoProxy`, `DefaultProxy`, `Http`, `Socks5`]. Default val"
+   },
+   {
+    "name": "proxyAddress",
+    "optional": true,
+    "description": "The proxy server address to use when `proxyType` is configured. This optional parameter is required to be used with Conditional Forwarder zones. The `initializeForwarder` parameter must be set to `true` to use this optio"
+   },
+   {
+    "name": "proxyPort",
+    "optional": true,
+    "description": "The proxy server port to use when `proxyType` is configured. This optional parameter is required to be used with Conditional Forwarder zones. The `initializeForwarder` parameter must be set to `true` to use this option."
+   },
+   {
+    "name": "proxyUsername",
+    "optional": true,
+    "description": "The proxy server username to use when `proxyType` is configured. This optional parameter is required to be used with Conditional Forwarder zones. The `initializeForwarder` parameter must be set to `true` to use this opti"
+   },
+   {
+    "name": "proxyPassword",
+    "optional": true,
+    "description": "The proxy server password to use when `proxyType` is configured. This optional parameter is required to be used with Conditional Forwarder zones. The `initializeForwarder` parameter must be set to `true` to use this opti"
+   }
+  ]
+ },
+ {
+  "group": "Authoritative Zone API Calls",
+  "title": "Import Zone",
+  "path": "/api/zones/import",
+  "permission": "Zones: Modify",
+  "params": [
+   {
+    "name": "zone",
+    "optional": false,
+    "description": "The domain name of the zone to import."
+   },
+   {
+    "name": "overwrite",
+    "optional": true,
+    "description": "Set to `true` to allow overwriting existing resource record set for the records being imported. Default value when unspecified is `true`."
+   },
+   {
+    "name": "overwriteZone",
+    "optional": true,
+    "description": "Set to `true` to delete all existing records from the zone before importing new records. Default value when unspecified is `false`."
+   },
+   {
+    "name": "overwriteSoaSerial",
+    "optional": true,
+    "description": "Set it to `true` to overwrite existing SOA record serial with the imported SOA record serial. Warning! Overwrite SOA serial option when used to set a lower SOA serial value than the current SOA serial will cause secondar"
+   }
+  ]
+ },
+ {
+  "group": "Authoritative Zone API Calls",
+  "title": "Export Zone",
+  "path": "/api/zones/export",
+  "permission": "Zones: View",
+  "params": [
+   {
+    "name": "zone",
+    "optional": false,
+    "description": "The domain name of the zone to export."
+   }
+  ]
+ },
+ {
+  "group": "Authoritative Zone API Calls",
+  "title": "Clone Zone",
+  "path": "/api/zones/clone",
+  "permission": "Zones: Modify",
+  "params": [
+   {
+    "name": "zone",
+    "optional": false,
+    "description": "The domain name of the zone to be created."
+   },
+   {
+    "name": "sourceZone",
+    "optional": false,
+    "description": "The domain name of the zone to be cloned."
+   }
+  ]
+ },
+ {
+  "group": "Authoritative Zone API Calls",
+  "title": "Convert Zone Type",
+  "path": "/api/zones/convert",
+  "permission": "Zones: Delete",
+  "params": [
+   {
+    "name": "zone",
+    "optional": false,
+    "description": "The domain name of the zone to be converted."
+   },
+   {
+    "name": "type",
+    "optional": false,
+    "description": "The zone type to convert the current zone to."
+   }
+  ]
+ },
+ {
+  "group": "Authoritative Zone API Calls",
+  "title": "Enable Zone",
+  "path": "/api/zones/enable",
+  "permission": "Zones: Modify\\",
+  "params": [
+   {
+    "name": "zone",
+    "optional": false,
+    "description": "The domain name of the zone to be enabled."
+   }
+  ]
+ },
+ {
+  "group": "Authoritative Zone API Calls",
+  "title": "Disable Zone",
+  "path": "/api/zones/disable",
+  "permission": "Zones: Modify\\",
+  "params": [
+   {
+    "name": "zone",
+    "optional": false,
+    "description": "The domain name of the zone to be disabled."
+   }
+  ]
+ },
+ {
+  "group": "Authoritative Zone API Calls",
+  "title": "Delete Zone",
+  "path": "/api/zones/delete",
+  "permission": "Zones: Delete\\",
+  "params": [
+   {
+    "name": "zone",
+    "optional": false,
+    "description": "The domain name of the zone to be deleted."
+   },
+   {
+    "name": "zones",
+    "optional": true,
+    "description": "A comma separated list of domain names of zones to be deleted. The `zone` parameter will be ignored when this parameter is used."
+   }
+  ]
+ },
+ {
+  "group": "Authoritative Zone API Calls",
+  "title": "Resync Zone",
+  "path": "/api/zones/resync",
+  "permission": "Zones: Modify\\",
+  "params": [
+   {
+    "name": "zone",
+    "optional": false,
+    "description": "The domain name of the zone to resync."
+   }
+  ]
+ },
+ {
+  "group": "Authoritative Zone API Calls",
+  "title": "Get Zone Options",
+  "path": "/api/zones/options/get",
+  "permission": "Zones: Modify\\",
+  "params": [
+   {
+    "name": "zone",
+    "optional": false,
+    "description": "The domain name of the zone to get options."
+   },
+   {
+    "name": "includeAvailableCatalogZoneNames",
+    "optional": false,
+    "description": "Set to `true` to include list of available Catalog zone names on the DNS server."
+   },
+   {
+    "name": "includeAvailableTsigKeyNames",
+    "optional": false,
+    "description": "Set to `true` to include list of available TSIG key names on the DNS server."
+   }
+  ]
+ },
+ {
+  "group": "Authoritative Zone API Calls",
+  "title": "Set Zone Options",
+  "path": "/api/zones/options/set",
+  "permission": "Zones: Modify\\",
+  "params": [
+   {
+    "name": "zone",
+    "optional": false,
+    "description": "The domain name of the zone to set options."
+   },
+   {
+    "name": "disabled",
+    "optional": true,
+    "description": "Sets if the zone is enabled or disabled."
+   },
+   {
+    "name": "catalog",
+    "optional": true,
+    "description": "Set a Catalog zone name to register as its member zone. This option is valid only for `Primary`, `Secondary`, `Stub`, and `Forwarder` zones."
+   },
+   {
+    "name": "overrideCatalogQueryAccess",
+    "optional": true,
+    "description": "Set to `true` to override Query Access option in the Catalog zone. This option is valid only for `Primary`, `Secondary`, `Stub`, and `Forwarder` zones."
+   },
+   {
+    "name": "overrideCatalogZoneTransfer",
+    "optional": true,
+    "description": "Set to `true` to override Zone Transfer option in the Catalog zone. This option is valid only for `Primary`, `Secondary`, and `Forwarder` zones."
+   },
+   {
+    "name": "overrideCatalogNotify",
+    "optional": true,
+    "description": "Set to `true` to override Notify option in the Catalog zone.  This option is valid only for `Primary`, and `Forwarder` zones."
+   },
+   {
+    "name": "primaryNameServerAddresses",
+    "optional": true,
+    "description": "List of comma separated IP addresses or domain names of the primary name server. This optional parameter is used only with `Secondary`, `SecondaryForwarder`, `SecondaryCatalog`, and `Stub` zones. If this parameter is not"
+   },
+   {
+    "name": "primaryZoneTransferProtocol",
+    "optional": true,
+    "description": "The zone transfer protocol to be used by `Secondary`, `SecondaryForwarder`, and `SecondaryCatalog` zones. Valid values are [`Tcp`, `Tls`, `Quic`]."
+   },
+   {
+    "name": "primaryZoneTransferTsigKeyName",
+    "optional": true,
+    "description": "The TSIG key name to be used by `Secondary`, `SecondaryForwarder`, and `SecondaryCatalog` zones for zone transfer."
+   },
+   {
+    "name": "validateZone",
+    "optional": false,
+    "description": "(optional): Set value as `true` to enable ZONEMD validation. When enabled, the `Secondary` zone will be validated using the ZONEMD record after every zone transfer. The zone will get disabled if the validation fails. The"
+   },
+   {
+    "name": "queryAccess",
+    "optional": true,
+    "description": "Valid options are [`Deny`, `Allow`, `AllowOnlyPrivateNetworks`, `AllowOnlyZoneNameServers`, `UseSpecifiedNetworkACL`, `AllowZoneNameServersAndUseSpecifiedNetworkACL`]."
+   },
+   {
+    "name": "queryAccessNetworkACL",
+    "optional": true,
+    "description": "A comma separated Access Control List (ACL) of Network Access Control (NAC) entry. NAC is an IP address or network address to allow. Add `!` at the start of the NAC to deny access. The ACL is processed in the same order "
+   },
+   {
+    "name": "zoneTransfer",
+    "optional": true,
+    "description": "Sets if the zone allows zone transfer. Valid options are [`Deny`, `Allow`, `AllowOnlyZoneNameServers`, `UseSpecifiedNetworkACL`, `AllowZoneNameServersAndUseSpecifiedNetworkACL`]. This option is valid only for Primary and"
+   },
+   {
+    "name": "zoneTransferNetworkACL",
+    "optional": true,
+    "description": "A comma separated Access Control List (ACL) of Network Access Control (NAC) entry. NAC is an IP address or network address to allow. Add `!` at the start of the NAC to deny access. The ACL is processed in the same order "
+   },
+   {
+    "name": "zoneTransferTsigKeyNames",
+    "optional": true,
+    "description": "A list of comma separated TSIG keys names that are authorized to perform a zone transfer. Set this option to `false` to clear all key names. This option is valid only for `Primary`, `Secondary`, `Forwarder`, and `Catalog"
+   },
+   {
+    "name": "notify",
+    "optional": true,
+    "description": "Sets if the DNS server should notify other DNS servers for zone updates. Valid options for `Primary` and `Secondary` zones are [`None`, `ZoneNameServers`, `SpecifiedNameServers`, `BothZoneAndSpecifiedNameServers`, `Separ"
+   },
+   {
+    "name": "notifyNameServers",
+    "optional": true,
+    "description": "A list of comma separated IP addresses which should be notified by the DNS server for zone updates. This list is used only when `notify` option is set to `SpecifiedNameServers` or `BothZoneAndSpecifiedNameServers`. This "
+   },
+   {
+    "name": "notifySecondaryCatalogsNameServers",
+    "optional": true,
+    "description": "A list of comma separated IP addresses which should be notified by the DNS server only for catalog zone updates. This list is used only when `notify` option is set to `SeparateNameServersForCatalogAndMemberZones`. This o"
+   },
+   {
+    "name": "update",
+    "optional": true,
+    "description": "Sets if the DNS server should allow dynamic updates (RFC 2136). This option is valid only for `Primary`, `Secondary`, and `Forwarder` zones. Valid options for `Primary` zones are [`Deny`, `Allow`, `AllowOnlyZoneNameServe"
+   },
+   {
+    "name": "updateNetworkACL",
+    "optional": true,
+    "description": "A comma separated Access Control List (ACL) of Network Access Control (NAC) entry. NAC is an IP address or network address to allow. Add `!` at the start of the NAC to deny access. The ACL is processed in the same order "
+   },
+   {
+    "name": "updateSecurityPolicies",
+    "optional": true,
+    "description": "A pipe `|` separated (used as both row and column separator) table data of security policies with each row containing the TSIG keys name, domain name and record types (comma separated) that are allowed. Use wildcard doma"
+   }
+  ]
+ },
+ {
+  "group": "Authoritative Zone API Calls",
+  "title": "Get Zone Permissions",
+  "path": "/api/zones/permissions/get",
+  "permission": "Zones: Modify\\",
+  "params": [
+   {
+    "name": "zone",
+    "optional": false,
+    "description": "The domain name of the zone to get the permissions for."
+   },
+   {
+    "name": "includeUsersAndGroups",
+    "optional": false,
+    "description": "Set to true to get a list of users and groups in the response."
+   }
+  ]
+ },
+ {
+  "group": "Authoritative Zone API Calls",
+  "title": "Set Zone Permissions",
+  "path": "/api/zones/permissions/set",
+  "permission": "Zones: Modify\\",
+  "params": [
+   {
+    "name": "zone",
+    "optional": false,
+    "description": "The domain name of the zone to get the permissions for."
+   },
+   {
+    "name": "userPermissions",
+    "optional": true,
+    "description": "A pipe `|` separated table data with each row containing username and boolean values for the view, modify and delete permissions. For example: user1|true|true|true|user2|true|false|false"
+   },
+   {
+    "name": "groupPermissions",
+    "optional": true,
+    "description": "A pipe `|` separated table data with each row containing the group name and boolean values for the view, modify and delete permissions. For example: group1|true|true|true|group2|true|true|false"
+   }
+  ]
+ },
+ {
+  "group": "Authoritative Zone API Calls",
+  "title": "Sign Zone",
+  "path": "/api/zones/dnssec/sign",
+  "permission": "",
+  "params": [
+   {
+    "name": "zone",
+    "optional": false,
+    "description": "The name of the primary zone to sign."
+   },
+   {
+    "name": "algorithm",
+    "optional": false,
+    "description": "The algorithm to be used for signing. Valid values are [`RSA`, `ECDSA`, `EDDSA`]."
+   },
+   {
+    "name": "pemKskPrivateKey",
+    "optional": true,
+    "description": "The user specified private key in PEM format for Key Signing Key (KSK). When this parameter is specified, the private key specified is used instead of automatically generating it."
+   },
+   {
+    "name": "pemZskPrivateKey",
+    "optional": true,
+    "description": "The user specified private key in PEM format for Zone Signing Key (ZSK). When this parameter is specified, the private key specified is used instead of automatically generating it."
+   },
+   {
+    "name": "hashAlgorithm",
+    "optional": true,
+    "description": "The hash algorithm to be used when using `RSA` algorithm. Valid values are [`MD5`, `SHA1`, `SHA256`, `SHA512`]. This optional parameter is required when using `RSA` algorithm."
+   },
+   {
+    "name": "kskKeySize",
+    "optional": true,
+    "description": "The size of the Key Signing Key (KSK) in bits to be used when using `RSA` algorithm. This optional parameter is required when using `RSA` algorithm."
+   },
+   {
+    "name": "zskKeySize",
+    "optional": true,
+    "description": "The size of the Zone Signing Key (ZSK) in bits to be used when using `RSA` algorithm. This optional parameter is required when using `RSA` algorithm."
+   },
+   {
+    "name": "curve",
+    "optional": true,
+    "description": "The name of the curve to be used when using `ECDSA` or `EDDSA` algorithm. Valid values are [`P256`, `P384`] for `ECDSA` algorithm and [`ED25519`, `ED448`] for `EDDSA` algorithm. This optional parameter is required when u"
+   },
+   {
+    "name": "dnsKeyTtl",
+    "optional": true,
+    "description": "The TTL value to be used for DNSKEY records. Default value is `86400` when not specified."
+   },
+   {
+    "name": "zskRolloverDays",
+    "optional": true,
+    "description": "The frequency in days that the DNS server must automatically rollover the Zone Signing Keys (ZSK) in the zone. Valid range is 0-365 days where 0 disables rollover. Default value is `30` when not specified."
+   },
+   {
+    "name": "nxProof",
+    "optional": true,
+    "description": "The type of proof of non-existence that must be used for signing the zone. Valid values are [`NSEC`, `NSEC3`]. Default value is `NSEC` when not specified."
+   },
+   {
+    "name": "iterations",
+    "optional": true,
+    "description": "The number of iterations to use for hashing in NSEC3. This optional parameter is only applicable when using `NSEC3` as the `nxProof`. Default value is `0` when not specified."
+   },
+   {
+    "name": "saltLength",
+    "optional": true,
+    "description": "The length of salt in bytes to use for hashing in NSEC3. This optional parameter is only applicable when using `NSEC3` as the `nxProof`. Default value is `0` when not specified."
+   }
+  ]
+ },
+ {
+  "group": "Authoritative Zone API Calls",
+  "title": "Unsign Zone",
+  "path": "/api/zones/dnssec/unsign",
+  "permission": "Zones: Modify\\",
+  "params": [
+   {
+    "name": "zone",
+    "optional": false,
+    "description": "The name of the primary zone to unsign."
+   }
+  ]
+ },
+ {
+  "group": "Authoritative Zone API Calls",
+  "title": "Get DS Info",
+  "path": "/api/zones/dnssec/viewDS",
+  "permission": "Zones: View\\",
+  "params": [
+   {
+    "name": "zone",
+    "optional": false,
+    "description": "The name of the signed primary zone."
+   }
+  ]
+ },
+ {
+  "group": "Authoritative Zone API Calls",
+  "title": "Get DNSSEC Properties",
+  "path": "/api/zones/dnssec/properties/get",
+  "permission": "Zones: Modify\\",
+  "params": [
+   {
+    "name": "zone",
+    "optional": false,
+    "description": "The name of the primary zone."
+   }
+  ]
+ },
+ {
+  "group": "Authoritative Zone API Calls",
+  "title": "Convert To NSEC",
+  "path": "/api/zones/dnssec/properties/convertToNSEC",
+  "permission": "Zones: Modify\\",
+  "params": [
+   {
+    "name": "zone",
+    "optional": false,
+    "description": "The name of the primary zone."
+   }
+  ]
+ },
+ {
+  "group": "Authoritative Zone API Calls",
+  "title": "Convert To NSEC3",
+  "path": "/api/zones/dnssec/properties/convertToNSEC3",
+  "permission": "Zones: Modify\\",
+  "params": [
+   {
+    "name": "zone",
+    "optional": false,
+    "description": "The name of the primary zone."
+   }
+  ]
+ },
+ {
+  "group": "Authoritative Zone API Calls",
+  "title": "Update NSEC3 Parameters",
+  "path": "/api/zones/dnssec/properties/updateNSEC3Params",
+  "permission": "Zones: Modify\\",
+  "params": [
+   {
+    "name": "zone",
+    "optional": false,
+    "description": "The name of the primary zone."
+   },
+   {
+    "name": "iterations",
+    "optional": true,
+    "description": "The number of iterations to use for hashing. Default value is `0` when not specified."
+   },
+   {
+    "name": "saltLength",
+    "optional": true,
+    "description": "The length of salt in bytes to use for hashing. Default value is `0` when not specified."
+   }
+  ]
+ },
+ {
+  "group": "Authoritative Zone API Calls",
+  "title": "Update DNSKEY TTL",
+  "path": "/api/zones/dnssec/properties/updateDnsKeyTtl",
+  "permission": "Zones: Modify\\",
+  "params": [
+   {
+    "name": "zone",
+    "optional": false,
+    "description": "The name of the primary zone."
+   },
+   {
+    "name": "ttl",
+    "optional": false,
+    "description": "The TTL value for the DNSKEY resource record set."
+   }
+  ]
+ },
+ {
+  "group": "Authoritative Zone API Calls",
+  "title": "Add Private Key",
+  "path": "/api/zones/dnssec/properties/addPrivateKey",
+  "permission": "Zones: Modify\\",
+  "params": [
+   {
+    "name": "zone",
+    "optional": false,
+    "description": "The name of the primary zone."
+   },
+   {
+    "name": "keyType",
+    "optional": false,
+    "description": "The type of key for which the private key is to be generated. Valid values are [`KeySigningKey`, `ZoneSigningKey`]."
+   },
+   {
+    "name": "rolloverDays",
+    "optional": true,
+    "description": "The frequency in days that the DNS server must automatically rollover the private key in the zone. Valid range is 0-365 days where 0 disables rollover. Default value is 90 days for Zone Signing Key (ZSK) and 0 days for K"
+   },
+   {
+    "name": "algorithm",
+    "optional": false,
+    "description": "The algorithm to be used for signing. Valid values are [`RSA`, `ECDSA`, `EDDSA`]."
+   },
+   {
+    "name": "pemPrivateKey",
+    "optional": true,
+    "description": "Specifies a user generated private key in PEM format to add. When not specified a private key will be automatically generated."
+   },
+   {
+    "name": "hashAlgorithm",
+    "optional": true,
+    "description": "The hash algorithm to be used when using `RSA` algorithm. Valid values are [`MD5`, `SHA1`, `SHA256`, `SHA512`]. This optional parameter is required when using `RSA` algorithm."
+   },
+   {
+    "name": "keySize",
+    "optional": true,
+    "description": "The size of the generated private key in bits to be used when using `RSA` algorithm. This optional parameter is required when using `RSA` algorithm."
+   },
+   {
+    "name": "curve",
+    "optional": true,
+    "description": "The name of the curve to be used when using `ECDSA` or `EDDSA` algorithm. Valid values are [`P256`, `P384`] for `ECDSA` algorithm and [`ED25519`, `ED448`] for `EDDSA` algorithm. This optional parameter is required when u"
+   }
+  ]
+ },
+ {
+  "group": "Authoritative Zone API Calls",
+  "title": "Update Private Key",
+  "path": "/api/zones/dnssec/properties/updatePrivateKey",
+  "permission": "Zones: Modify\\",
+  "params": [
+   {
+    "name": "zone",
+    "optional": false,
+    "description": "The name of the primary zone."
+   },
+   {
+    "name": "keyTag",
+    "optional": false,
+    "description": "The key tag of the private key to be updated."
+   },
+   {
+    "name": "rolloverDays",
+    "optional": false,
+    "description": "The frequency in days that the DNS server must automatically rollover the private key in the zone. Valid range is 0-365 days where 0 disables rollover."
+   }
+  ]
+ },
+ {
+  "group": "Authoritative Zone API Calls",
+  "title": "Delete Private Key",
+  "path": "/api/zones/dnssec/properties/deletePrivateKey",
+  "permission": "Zones: Modify\\",
+  "params": [
+   {
+    "name": "zone",
+    "optional": false,
+    "description": "The name of the primary zone."
+   },
+   {
+    "name": "keyTag",
+    "optional": false,
+    "description": "The key tag of the private key to be deleted."
+   }
+  ]
+ },
+ {
+  "group": "Authoritative Zone API Calls",
+  "title": "Publish All Private Keys",
+  "path": "/api/zones/dnssec/properties/publishAllPrivateKeys",
+  "permission": "Zones: Modify\\",
+  "params": [
+   {
+    "name": "zone",
+    "optional": false,
+    "description": "The name of the primary zone."
+   }
+  ]
+ },
+ {
+  "group": "Authoritative Zone API Calls",
+  "title": "Rollover DNSKEY",
+  "path": "/api/zones/dnssec/properties/rolloverDnsKey",
+  "permission": "Zones: Modify\\",
+  "params": [
+   {
+    "name": "zone",
+    "optional": false,
+    "description": "The name of the primary zone."
+   },
+   {
+    "name": "keyTag",
+    "optional": false,
+    "description": "The key tag of the private key to rollover."
+   }
+  ]
+ },
+ {
+  "group": "Authoritative Zone API Calls",
+  "title": "Retire DNSKEY",
+  "path": "/api/zones/dnssec/properties/retireDnsKey",
+  "permission": "Zones: Modify\\",
+  "params": [
+   {
+    "name": "zone",
+    "optional": false,
+    "description": "The name of the primary zone."
+   },
+   {
+    "name": "keyTag",
+    "optional": false,
+    "description": "The key tag of the private key to retire."
+   }
+  ]
+ },
+ {
+  "group": "Authoritative Zone API Calls",
+  "title": "Add Record",
+  "path": "/api/zones/records/add",
+  "permission": "Zones: None\\",
+  "params": [
+   {
+    "name": "domain",
+    "optional": false,
+    "description": "The domain name of the zone to add record."
+   },
+   {
+    "name": "zone",
+    "optional": true,
+    "description": "The name of the authoritative zone into which the `domain` exists. When unspecified, the closest authoritative zone will be used."
+   },
+   {
+    "name": "type",
+    "optional": false,
+    "description": "The DNS resource record type. Supported record types are [`A`, `AAAA`, `NS`, `CNAME`, `PTR`, `MX`, `TXT`, `SRV`, `DNAME`, `DS`, `SSHFP`, `TLSA`, `SVCB`, `HTTPS`, `URI`, `CAA`] and proprietary types [`ANAME`, `FWD`, `APP`"
+   },
+   {
+    "name": "ttl",
+    "optional": true,
+    "description": "The DNS resource record TTL value. This is the value in seconds that the DNS resolvers can cache the record for. When not specified the default TTL value from settings will be used."
+   },
+   {
+    "name": "overwrite",
+    "optional": true,
+    "description": "This option when set to `true` will overwrite existing resource record set for the selected `type` with the new record. Default value of `false` will add the new record into existing resource record set."
+   },
+   {
+    "name": "comments",
+    "optional": true,
+    "description": "Sets comments for the added resource record."
+   },
+   {
+    "name": "expiryTtl",
+    "optional": true,
+    "description": "Set to automatically delete the record when the value in seconds elapses since the record\u2019s last modified time."
+   },
+   {
+    "name": "ipAddress",
+    "optional": true,
+    "description": "The IP address for adding `A` or `AAAA` record. A special value of `request-ip-address` can be used to set the record with the IP address of the API HTTP request to help with dynamic DNS update applications. This option "
+   },
+   {
+    "name": "ptr",
+    "optional": true,
+    "description": "Set this option to `true` to add a reverse PTR record for the IP address in the `A` or `AAAA` record. This option is used only for `A` and `AAAA` records."
+   },
+   {
+    "name": "createPtrZone",
+    "optional": true,
+    "description": "Set this option to `true` to create a reverse zone for PTR record. This option is used for `A` and `AAAA` records."
+   },
+   {
+    "name": "updateSvcbHints",
+    "optional": true,
+    "description": "Set this option to `true` to update any SVCB/HTTPS records in the zone that has Automatic Hints option enabled and matches its target name with the current record's domain name. This option is used for `A` and `AAAA` rec"
+   },
+   {
+    "name": "nameServer",
+    "optional": true,
+    "description": "The name server domain name. This option is required for adding `NS` record."
+   },
+   {
+    "name": "glue",
+    "optional": true,
+    "description": "This is the glue address for the name server in the `NS` record. This optional parameter is used for adding `NS` record."
+   },
+   {
+    "name": "cname",
+    "optional": true,
+    "description": "The CNAME domain name. This option is required for adding `CNAME` record."
+   },
+   {
+    "name": "ptrName",
+    "optional": true,
+    "description": "The PTR domain name. This option is required for adding `PTR` record."
+   },
+   {
+    "name": "exchange",
+    "optional": true,
+    "description": "The exchange domain name. This option is required for adding `MX` record."
+   },
+   {
+    "name": "preference",
+    "optional": true,
+    "description": "This is the preference value for `MX` record type. This option is required for adding `MX` record."
+   },
+   {
+    "name": "characterStringsBase64",
+    "optional": true,
+    "description": "A comma separated list of character-strings in base64 encoding for adding `TXT` record."
+   },
+   {
+    "name": "text",
+    "optional": true,
+    "description": "The text data for `TXT` record. This option is required for adding `TXT` record when `characterStringsBase64` is not used."
+   },
+   {
+    "name": "splitText",
+    "optional": true,
+    "description": "Set to `true` for using new line char to split text into multiple character-strings for adding `TXT` record when `characterStringsBase64` is not used."
+   },
+   {
+    "name": "mailbox",
+    "optional": true,
+    "description": "Set an email address for adding `RP` record."
+   },
+   {
+    "name": "txtDomain",
+    "optional": true,
+    "description": "Set a `TXT` record's domain name for adding `RP` record."
+   },
+   {
+    "name": "priority",
+    "optional": true,
+    "description": "This parameter is required for adding the `SRV` record."
+   },
+   {
+    "name": "weight",
+    "optional": true,
+    "description": "This parameter is required for adding the `SRV` record."
+   },
+   {
+    "name": "port",
+    "optional": true,
+    "description": "This parameter is required for adding the `SRV` record."
+   },
+   {
+    "name": "target",
+    "optional": true,
+    "description": "This parameter is required for adding the `SRV` record."
+   },
+   {
+    "name": "naptrOrder",
+    "optional": true,
+    "description": "This parameter is required for adding the `NAPTR` record."
+   },
+   {
+    "name": "naptrPreference",
+    "optional": true,
+    "description": "This parameter is required for adding the `NAPTR` record."
+   },
+   {
+    "name": "naptrFlags",
+    "optional": true,
+    "description": "This parameter is required for adding the `NAPTR` record."
+   },
+   {
+    "name": "naptrServices",
+    "optional": true,
+    "description": "This parameter is required for adding the `NAPTR` record."
+   },
+   {
+    "name": "naptrRegexp",
+    "optional": true,
+    "description": "This parameter is required for adding the `NAPTR` record."
+   },
+   {
+    "name": "naptrReplacement",
+    "optional": true,
+    "description": "This parameter is required for adding the `NAPTR` record."
+   },
+   {
+    "name": "dname",
+    "optional": true,
+    "description": "The DNAME domain name. This option is required for adding `DNAME` record."
+   },
+   {
+    "name": "keyTag",
+    "optional": true,
+    "description": "This parameter is required for adding `DS` record."
+   },
+   {
+    "name": "algorithm",
+    "optional": true,
+    "description": "Valid values are [`RSAMD5`, `DSA`, `RSASHA1`, `DSA-NSEC3-SHA1`, `RSASHA1-NSEC3-SHA1`, `RSASHA256`, `RSASHA512`, `ECC-GOST`, `ECDSAP256SHA256`, `ECDSAP384SHA384`, `ED25519`, `ED448`]. This parameter is required for adding"
+   },
+   {
+    "name": "digestType",
+    "optional": true,
+    "description": "Valid values are [`SHA1`, `SHA256`, `GOST-R-34-11-94`, `SHA384`]. This parameter is required for adding `DS` record."
+   },
+   {
+    "name": "digest",
+    "optional": true,
+    "description": "A hex string value. This parameter is required for adding `DS` record."
+   },
+   {
+    "name": "sshfpAlgorithm",
+    "optional": true,
+    "description": "Valid values are [`RSA`, `DSA`, `ECDSA`, `Ed25519`, `Ed448`]. This parameter is required for adding `SSHFP` record."
+   },
+   {
+    "name": "sshfpFingerprintType",
+    "optional": true,
+    "description": "Valid values are [`SHA1`, `SHA256`]. This parameter is required for adding `SSHFP` record."
+   },
+   {
+    "name": "sshfpFingerprint",
+    "optional": true,
+    "description": "A hex string value. This parameter is required for adding `SSHFP` record."
+   },
+   {
+    "name": "tlsaCertificateUsage",
+    "optional": true,
+    "description": "Valid values are [`PKIX-TA`, `PKIX-EE`, `DANE-TA`, `DANE-EE`]. This parameter is required for adding `TLSA` record."
+   },
+   {
+    "name": "tlsaSelector",
+    "optional": true,
+    "description": "Valid values are [`Cert`, `SPKI`]. This parameter is required for adding `TLSA` record."
+   },
+   {
+    "name": "tlsaMatchingType",
+    "optional": true,
+    "description": "Valid value are [`Full`, `SHA2-256`, `SHA2-512`]. This parameter is required for adding `TLSA` record."
+   },
+   {
+    "name": "tlsaCertificateAssociationData",
+    "optional": true,
+    "description": "A X509 certificate in PEM format or a hex string value. This parameter is required for adding `TLSA` record."
+   },
+   {
+    "name": "svcPriority",
+    "optional": true,
+    "description": "The priority value for `SVCB` or `HTTPS` record. This parameter is required for adding `SCVB` or `HTTPS` record."
+   },
+   {
+    "name": "svcTargetName",
+    "optional": true,
+    "description": "The target domain name for `SVCB` or `HTTPS` record. This parameter is required for adding `SCVB` or `HTTPS` record."
+   },
+   {
+    "name": "svcParams",
+    "optional": true,
+    "description": "The service parameters for `SVCB` or `HTTPS` record which is a pipe separated list of key and value. For example, `alpn|h2,h3|port|53443`. To clear existing values, set it to `false`. This parameter is required for addin"
+   },
+   {
+    "name": "autoIpv4Hint",
+    "optional": true,
+    "description": "Set this option to `true` to enable Automatic Hints for the `ipv4hint` parameter in the `svcParams`. This option is valid only for `SVCB` and `HTTPS` records."
+   },
+   {
+    "name": "autoIpv6Hint",
+    "optional": true,
+    "description": "Set this option to `true` to enable Automatic Hints for the `ipv6hint` parameter in the `svcParams`. This option is valid only for `SVCB` and `HTTPS` records."
+   },
+   {
+    "name": "uriPriority",
+    "optional": true,
+    "description": "The priority value for adding the `URI` record."
+   },
+   {
+    "name": "uriWeight",
+    "optional": true,
+    "description": "The weight value for adding the `URI` record."
+   },
+   {
+    "name": "uri",
+    "optional": true,
+    "description": "The URI value for adding the `URI` record."
+   },
+   {
+    "name": "flags",
+    "optional": true,
+    "description": "This parameter is required for adding the `CAA` record."
+   },
+   {
+    "name": "tag",
+    "optional": true,
+    "description": "This parameter is required for adding the `CAA` record."
+   },
+   {
+    "name": "value",
+    "optional": true,
+    "description": "This parameter is required for adding the `CAA` record."
+   },
+   {
+    "name": "aname",
+    "optional": true,
+    "description": "The ANAME domain name. This option is required for adding `ANAME` record."
+   },
+   {
+    "name": "protocol",
+    "optional": true,
+    "description": "This parameter is required for adding the `FWD` record. Valid values are [`Udp`, `Tcp`, `Tls`, `Https`, `Quic`]."
+   },
+   {
+    "name": "forwarder",
+    "optional": true,
+    "description": "The forwarder address. A special value of `this-server` can be used to directly forward requests internally to the DNS server. This parameter is required for adding the `FWD` record."
+   },
+   {
+    "name": "forwarderPriority",
+    "optional": true,
+    "description": "Set an integer priority value for adding the `FWD` record. Forwarders with high priority (lower value) will be queried before trying for low priority forwarders. Forwarders with the same priority will be concurrently que"
+   },
+   {
+    "name": "dnssecValidation",
+    "optional": true,
+    "description": "Set this boolean value to indicate if DNSSEC validation must be done. This optional parameter is to be used with FWD records. Default value is `false`."
+   },
+   {
+    "name": "proxyType",
+    "optional": true,
+    "description": "The type of proxy that must be used for conditional forwarding. This optional parameter is to be used with FWD records. Valid values are [`NoProxy`, `DefaultProxy`, `Http`, `Socks5`]. Default value `DefaultProxy` is used"
+   },
+   {
+    "name": "proxyAddress",
+    "optional": true,
+    "description": "The proxy server address to use when `proxyType` is configured. This optional parameter is to be used with FWD records."
+   },
+   {
+    "name": "proxyPort",
+    "optional": true,
+    "description": "The proxy server port to use when `proxyType` is configured. This optional parameter is to be used with FWD records."
+   },
+   {
+    "name": "proxyUsername",
+    "optional": true,
+    "description": "The proxy server username to use when `proxyType` is configured. This optional parameter is to be used with FWD records."
+   },
+   {
+    "name": "proxyPassword",
+    "optional": true,
+    "description": "The proxy server password to use when `proxyType` is configured. This optional parameter is to be used with FWD records."
+   },
+   {
+    "name": "appName",
+    "optional": true,
+    "description": "The name of the DNS app. This parameter is required for adding the `APP` record."
+   },
+   {
+    "name": "classPath",
+    "optional": true,
+    "description": "This parameter is required for adding the `APP` record."
+   },
+   {
+    "name": "recordData",
+    "optional": true,
+    "description": "This parameter is used for adding the `APP` record as per the DNS app requirements."
+   },
+   {
+    "name": "rdata",
+    "optional": true,
+    "description": "This parameter is used for adding unknown i.e. unsupported record types. The value must be formatted as a hex string or a colon separated hex string."
+   }
+  ]
+ },
+ {
+  "group": "Authoritative Zone API Calls",
+  "title": "Get Records",
+  "path": "/api/zones/records/get",
+  "permission": "Zones: None\\",
+  "params": [
+   {
+    "name": "domain",
+    "optional": false,
+    "description": "The domain name of the zone to get records."
+   },
+   {
+    "name": "zone",
+    "optional": true,
+    "description": "The name of the authoritative zone into which the `domain` exists. When unspecified, the closest authoritative zone will be used."
+   },
+   {
+    "name": "listZone",
+    "optional": true,
+    "description": "When set to `true` will list all records in the zone else will list records only for the given domain name. Default value is `false` when not specified."
+   }
+  ]
+ },
+ {
+  "group": "Authoritative Zone API Calls",
+  "title": "Update Record",
+  "path": "/api/zones/records/update",
+  "permission": "Zones: None\\",
+  "params": [
+   {
+    "name": "domain",
+    "optional": false,
+    "description": "The domain name of the zone to update the record."
+   },
+   {
+    "name": "zone",
+    "optional": true,
+    "description": "The name of the authoritative zone into which the `domain` exists. When unspecified, the closest authoritative zone will be used."
+   },
+   {
+    "name": "type",
+    "optional": false,
+    "description": "The type of the resource record to update."
+   },
+   {
+    "name": "newDomain",
+    "optional": true,
+    "description": "The new domain name to be set for the record. To be used to rename sub domain name of the record."
+   },
+   {
+    "name": "ttl",
+    "optional": true,
+    "description": "The TTL value of the resource record. Default value of `3600` is used when parameter is missing."
+   },
+   {
+    "name": "disable",
+    "optional": true,
+    "description": "Specifies if the record should be disabled. The default value is `false` when this parameter is missing."
+   },
+   {
+    "name": "comments",
+    "optional": true,
+    "description": "Sets comments for the updated resource record."
+   },
+   {
+    "name": "expiryTtl",
+    "optional": true,
+    "description": "Set to automatically delete the record when the value in seconds elapses since the record\u2019s last modified time."
+   },
+   {
+    "name": "ipAddress",
+    "optional": true,
+    "description": "The current IP address in the `A` or `AAAA` record. This parameter is required when updating `A` or `AAAA` record."
+   },
+   {
+    "name": "newIpAddress",
+    "optional": true,
+    "description": "The new IP address in the `A` or `AAAA` record. This parameter when missing will use the current value in the record."
+   },
+   {
+    "name": "ptr",
+    "optional": true,
+    "description": "Set this option to `true` to specify if the PTR record associated with the `A` or `AAAA` record must also be updated. This option is used only for `A` and `AAAA` records."
+   },
+   {
+    "name": "createPtrZone",
+    "optional": true,
+    "description": "Set this option to `true` to create a reverse zone for PTR record. This option is used only for `A` and `AAAA` records."
+   },
+   {
+    "name": "updateSvcbHints",
+    "optional": true,
+    "description": "Set this option to `true` to update any SVCB/HTTPS records in the zone that has Automatic Hints option enabled and matches its target name with the current record's domain name. This option is used for `A` and `AAAA` rec"
+   },
+   {
+    "name": "nameServer",
+    "optional": true,
+    "description": "The current name server domain name. This option is required for updating `NS` record."
+   },
+   {
+    "name": "newNameServer",
+    "optional": true,
+    "description": "The new server domain name. This option is used for updating `NS` record."
+   },
+   {
+    "name": "glue",
+    "optional": true,
+    "description": "The comma separated list of IP addresses set as glue for the NS record. This parameter is used only when updating `NS` record."
+   },
+   {
+    "name": "cname",
+    "optional": true,
+    "description": "The CNAME domain name to update in the existing `CNAME` record."
+   },
+   {
+    "name": "primaryNameServer",
+    "optional": true,
+    "description": "This is the primary name server parameter in the SOA record. This parameter is required when updating the SOA record."
+   },
+   {
+    "name": "responsiblePerson",
+    "optional": true,
+    "description": "This is the responsible person parameter in the SOA record. This parameter is required when updating the SOA record."
+   },
+   {
+    "name": "serial",
+    "optional": true,
+    "description": "This is the serial parameter in the SOA record. This parameter is required when updating the SOA record."
+   },
+   {
+    "name": "refresh",
+    "optional": true,
+    "description": "This is the refresh parameter in the SOA record. This parameter is required when updating the SOA record."
+   },
+   {
+    "name": "retry",
+    "optional": true,
+    "description": "This is the retry parameter in the SOA record. This parameter is required when updating the SOA record."
+   },
+   {
+    "name": "expire",
+    "optional": true,
+    "description": "This is the expire parameter in the SOA record. This parameter is required when updating the SOA record."
+   },
+   {
+    "name": "minimum",
+    "optional": true,
+    "description": "This is the minimum parameter in the SOA record. This parameter is required when updating the SOA record."
+   },
+   {
+    "name": "useSerialDateScheme",
+    "optional": true,
+    "description": "Set value to `true` to enable using date scheme for SOA serial. This optional parameter is used only with `Primary`, `Forwarder`, and `Catalog` zones. Default value is `false`. This parameter is required when updating th"
+   },
+   {
+    "name": "ptrName",
+    "optional": true,
+    "description": "The current PTR domain name. This option is required for updating `PTR` record."
+   },
+   {
+    "name": "newPtrName",
+    "optional": true,
+    "description": "The new PTR domain name. This option is required for updating `PTR` record."
+   },
+   {
+    "name": "preference",
+    "optional": true,
+    "description": "The current preference value in an MX record. This parameter when missing will default to `1` value. This parameter is used only when updating `MX` record."
+   },
+   {
+    "name": "newPreference",
+    "optional": true,
+    "description": "The new preference value in an MX record. This parameter when missing will use the old value. This parameter is used only when updating `MX` record."
+   },
+   {
+    "name": "exchange",
+    "optional": true,
+    "description": "The current exchange domain name. This option is required for updating `MX` record."
+   },
+   {
+    "name": "newExchange",
+    "optional": true,
+    "description": "The new exchange domain name. This option is required for updating `MX` record."
+   },
+   {
+    "name": "characterStringsBase64",
+    "optional": true,
+    "description": "A comma separated list of character-strings in base64 encoding for current TXT record."
+   },
+   {
+    "name": "newCharacterStringsBase64",
+    "optional": true,
+    "description": "A comma separated list of character-strings in base64 encoding for new TXT record."
+   },
+   {
+    "name": "text",
+    "optional": true,
+    "description": "The current text value. This option is required for updating `TXT` record when `characterStringsBase64` is not used."
+   },
+   {
+    "name": "newText",
+    "optional": true,
+    "description": "The new text value. This option is required for updating `TXT` record when `newCharacterStringsBase64` is not used."
+   },
+   {
+    "name": "splitText",
+    "optional": true,
+    "description": "The current split text value. This option is used for updating `TXT` record when `characterStringsBase64` is not used and is set to `false` when unspecified."
+   },
+   {
+    "name": "newSplitText",
+    "optional": true,
+    "description": "The new split text value. This option is used for updating `TXT` record when `newCharacterStringsBase64` is not used and is set to current split text value when unspecified."
+   },
+   {
+    "name": "mailbox",
+    "optional": true,
+    "description": "The current email address value. This option is required for updating `RP` record."
+   },
+   {
+    "name": "newMailbox",
+    "optional": true,
+    "description": "The new email address value. This option is used for updating `RP` record and is set to the current value when unspecified."
+   },
+   {
+    "name": "txtDomain",
+    "optional": true,
+    "description": "The current TXT record's domain name value. This option is required for updating `RP` record."
+   },
+   {
+    "name": "newTxtDomain",
+    "optional": true,
+    "description": "The new TXT record's domain name value. This option is used for updating `RP` record and is set to the current value when unspecified."
+   },
+   {
+    "name": "priority",
+    "optional": true,
+    "description": "This is the current priority in the SRV record. This parameter is required when updating the `SRV` record."
+   },
+   {
+    "name": "newPriority",
+    "optional": true,
+    "description": "This is the new priority in the SRV record. This parameter when missing will use the old value. This parameter is used when updating the `SRV` record."
+   },
+   {
+    "name": "weight",
+    "optional": true,
+    "description": "This is the current weight in the SRV record. This parameter is required when updating the `SRV` record."
+   },
+   {
+    "name": "newWeight",
+    "optional": true,
+    "description": "This is the new weight in the SRV record. This parameter when missing will use the old value. This parameter is used when updating the `SRV` record."
+   },
+   {
+    "name": "port",
+    "optional": true,
+    "description": "This is the port parameter in the SRV record. This parameter is required when updating the `SRV` record."
+   },
+   {
+    "name": "newPort",
+    "optional": true,
+    "description": "This is the new value of the port parameter in the SRV record. This parameter when missing will use the old value. This parameter is used to update the port parameter in the `SRV` record."
+   },
+   {
+    "name": "target",
+    "optional": true,
+    "description": "The current target value. This parameter is required when updating the `SRV` record."
+   },
+   {
+    "name": "newTarget",
+    "optional": true,
+    "description": "The new target value. This parameter when missing will use the old value. This parameter is required when updating the `SRV` record."
+   },
+   {
+    "name": "naptrOrder",
+    "optional": true,
+    "description": "The current value in the NAPTR record. This parameter is required when updating the `NAPTR` record."
+   },
+   {
+    "name": "naptrNewOrder",
+    "optional": true,
+    "description": "The new value in the NAPTR record. This parameter when missing will use the old value. This parameter is used when updating the `NAPTR` record."
+   },
+   {
+    "name": "naptrPreference",
+    "optional": true,
+    "description": "The current value in the NAPTR record. This parameter is required when updating the `NAPTR` record."
+   },
+   {
+    "name": "naptrNewPreference",
+    "optional": true,
+    "description": "The new value in the NAPTR record. This parameter when missing will use the old value. This parameter is used when updating the `NAPTR` record."
+   },
+   {
+    "name": "naptrFlags",
+    "optional": true,
+    "description": "The current value in the NAPTR record. This parameter is required when updating the `NAPTR` record."
+   },
+   {
+    "name": "naptrNewFlags",
+    "optional": true,
+    "description": "The new value in the NAPTR record. This parameter when missing will use the old value. This parameter is used when updating the `NAPTR` record."
+   },
+   {
+    "name": "naptrServices",
+    "optional": true,
+    "description": "The current value in the NAPTR record. This parameter is required when updating the `NAPTR` record."
+   },
+   {
+    "name": "naptrNewServices",
+    "optional": true,
+    "description": "The new value in the NAPTR record. This parameter when missing will use the old value. This parameter is used when updating the `NAPTR` record."
+   },
+   {
+    "name": "naptrRegexp",
+    "optional": true,
+    "description": "The current value in the NAPTR record. This parameter is required when updating the `NAPTR` record."
+   },
+   {
+    "name": "naptrNewRegexp",
+    "optional": true,
+    "description": "The new value in the NAPTR record. This parameter when missing will use the old value. This parameter is used when updating the `NAPTR` record."
+   },
+   {
+    "name": "naptrReplacement",
+    "optional": true,
+    "description": "The current value in the NAPTR record. This parameter is required when updating the `NAPTR` record."
+   },
+   {
+    "name": "naptrNewReplacement",
+    "optional": true,
+    "description": "The new value in the NAPTR record. This parameter when missing will use the old value. This parameter is used when updating the `NAPTR` record."
+   },
+   {
+    "name": "dname",
+    "optional": true,
+    "description": "The DNAME domain name. This parameter is required when updating the `DNAME` record."
+   },
+   {
+    "name": "keyTag",
+    "optional": true,
+    "description": "This parameter is required when updating `DS` record."
+   },
+   {
+    "name": "newKeyTag",
+    "optional": true,
+    "description": "This parameter is required when updating `DS` record."
+   },
+   {
+    "name": "algorithm",
+    "optional": true,
+    "description": "This parameter is required when updating `DS` record."
+   },
+   {
+    "name": "newAlgorithm",
+    "optional": true,
+    "description": "This parameter is required when updating `DS` record."
+   },
+   {
+    "name": "digestType",
+    "optional": true,
+    "description": "This parameter is required when updating `DS` record."
+   },
+   {
+    "name": "newDigestType",
+    "optional": true,
+    "description": "This parameter is required when updating `DS` record."
+   },
+   {
+    "name": "digest",
+    "optional": true,
+    "description": "This parameter is required when updating `DS` record."
+   },
+   {
+    "name": "newDigest",
+    "optional": true,
+    "description": "This parameter is required when updating `DS` record."
+   },
+   {
+    "name": "sshfpAlgorithm",
+    "optional": true,
+    "description": "This parameter is required when updating `SSHFP` record."
+   },
+   {
+    "name": "newSshfpAlgorithm",
+    "optional": true,
+    "description": "This parameter is required when updating `SSHFP` record."
+   },
+   {
+    "name": "sshfpFingerprintType",
+    "optional": true,
+    "description": "This parameter is required when updating `SSHFP` record."
+   },
+   {
+    "name": "newSshfpFingerprintType",
+    "optional": true,
+    "description": "This parameter is required when updating `SSHFP` record."
+   },
+   {
+    "name": "sshfpFingerprint",
+    "optional": true,
+    "description": "This parameter is required when updating `SSHFP` record."
+   },
+   {
+    "name": "newSshfpFingerprint",
+    "optional": true,
+    "description": "This parameter is required when updating `SSHFP` record."
+   },
+   {
+    "name": "tlsaCertificateUsage",
+    "optional": true,
+    "description": "This parameter is required when updating `TLSA` record."
+   },
+   {
+    "name": "newTlsaCertificateUsage",
+    "optional": true,
+    "description": "This parameter is required when updating `TLSA` record."
+   },
+   {
+    "name": "tlsaSelector",
+    "optional": true,
+    "description": "This parameter is required when updating `TLSA` record."
+   },
+   {
+    "name": "newTlsaSelector",
+    "optional": true,
+    "description": "This parameter is required when updating `TLSA` record."
+   },
+   {
+    "name": "tlsaMatchingType",
+    "optional": true,
+    "description": "This parameter is required when updating `TLSA` record."
+   },
+   {
+    "name": "newTlsaMatchingType",
+    "optional": true,
+    "description": "This parameter is required when updating `TLSA` record."
+   },
+   {
+    "name": "tlsaCertificateAssociationData",
+    "optional": true,
+    "description": "This parameter is required when updating `TLSA` record."
+   },
+   {
+    "name": "newTlsaCertificateAssociationData",
+    "optional": true,
+    "description": "This parameter is required when updating `TLSA` record."
+   },
+   {
+    "name": "svcPriority",
+    "optional": true,
+    "description": "The priority value for `SVCB` or `HTTPS` record. This parameter is required for updating `SCVB` or `HTTPS` record."
+   },
+   {
+    "name": "newSvcPriority",
+    "optional": true,
+    "description": "The new priority value for `SVCB` or `HTTPS` record. This parameter when missing will use the old value."
+   },
+   {
+    "name": "svcTargetName",
+    "optional": true,
+    "description": "The target domain name for `SVCB` or `HTTPS` record. This parameter is required for updating `SCVB` or `HTTPS` record."
+   },
+   {
+    "name": "newSvcTargetName",
+    "optional": true,
+    "description": "The new target domain name for `SVCB` or `HTTPS` record. This parameter when missing will use the old value."
+   },
+   {
+    "name": "svcParams",
+    "optional": true,
+    "description": "The service parameters for `SVCB` or `HTTPS` record which is a pipe separated list of key and value. For example, `alpn|h2,h3|port|53443`. To clear existing values, set it to `false`. This parameter is required for updat"
+   },
+   {
+    "name": "newSvcParams",
+    "optional": true,
+    "description": "The new service parameters for `SVCB` or `HTTPS` record which is a pipe separated list of key and value. To clear existing values, set it to `false`. This parameter when missing will use the old value."
+   },
+   {
+    "name": "autoIpv4Hint",
+    "optional": true,
+    "description": "Set this option to `true` to enable Automatic Hints for the `ipv4hint` parameter in the `newSvcParams`. This option is valid only for `SVCB` and `HTTPS` records."
+   },
+   {
+    "name": "autoIpv6Hint",
+    "optional": true,
+    "description": "Set this option to `true` to enable Automatic Hints for the `ipv6hint` parameter in the `newSvcParams`. This option is valid only for `SVCB` and `HTTPS` records."
+   },
+   {
+    "name": "uriPriority",
+    "optional": true,
+    "description": "The priority value for the `URI` record. This parameter is required for updating the `URI` record."
+   },
+   {
+    "name": "newUriPriority",
+    "optional": true,
+    "description": "The new priority value for the `URI` record. This parameter when missing will use the old value."
+   },
+   {
+    "name": "uriWeight",
+    "optional": true,
+    "description": "The weight value for the `URI` record. This parameter is required for updating the `URI` record."
+   },
+   {
+    "name": "newUriWeight",
+    "optional": true,
+    "description": "The new weight value for the `URI` record. This parameter when missing will use the old value."
+   },
+   {
+    "name": "uri",
+    "optional": true,
+    "description": "The URI value for the `URI` record. This parameter is required for updating the `URI` record."
+   },
+   {
+    "name": "newUri",
+    "optional": true,
+    "description": "The new URI value for the `URI` record. This parameter when missing will use the old value."
+   },
+   {
+    "name": "flags",
+    "optional": true,
+    "description": "This is the flags parameter in the `CAA` record. This parameter is required when updating the `CAA` record."
+   },
+   {
+    "name": "newFlags",
+    "optional": true,
+    "description": "This is the new value of the flags parameter in the `CAA` record. This parameter is used to update the flags parameter in the `CAA` record."
+   },
+   {
+    "name": "tag",
+    "optional": true,
+    "description": "This is the tag parameter in the `CAA` record. This parameter is required when updating the `CAA` record."
+   },
+   {
+    "name": "newTag",
+    "optional": true,
+    "description": "This is the new value of the tag parameter in the `CAA` record. This parameter is used to update the tag parameter in the `CAA` record."
+   },
+   {
+    "name": "value",
+    "optional": true,
+    "description": "The current value in `CAA` record. This parameter is required when updating the `CAA` record."
+   },
+   {
+    "name": "newValue",
+    "optional": true,
+    "description": "The new value in `CAA` record. This parameter is required when updating the `CAA` record."
+   },
+   {
+    "name": "aname",
+    "optional": true,
+    "description": "The current `ANAME` domain name. This parameter is required when updating the `ANAME` record."
+   },
+   {
+    "name": "newAName",
+    "optional": true,
+    "description": "The new `ANAME` domain name. This parameter is required when updating the `ANAME` record."
+   },
+   {
+    "name": "protocol",
+    "optional": true,
+    "description": "This is the current protocol value in the `FWD` record. Valid values are [`Udp`, `Tcp`, `Tls`, `Https`, `Quic`]. This parameter is optional and default value `Udp` will be used when updating the `FWD` record."
+   },
+   {
+    "name": "newProtocol",
+    "optional": true,
+    "description": "This is the new protocol value in the `FWD` record. Valid values are [`Udp`, `Tcp`, `Tls`, `Https`, `Quic`]. This parameter is optional and default value `Udp` will be used when updating the `FWD` record."
+   },
+   {
+    "name": "forwarder",
+    "optional": true,
+    "description": "The current forwarder address. This parameter is required when updating the `FWD` record."
+   },
+   {
+    "name": "newForwarder",
+    "optional": true,
+    "description": "The new forwarder address. This parameter is required when updating the `FWD` record."
+   },
+   {
+    "name": "forwarderPriority",
+    "optional": true,
+    "description": "The current forwarder priority value. This optional parameter is to be used with `FWD` record. When unspecified, the default value of `0` will be used."
+   },
+   {
+    "name": "dnssecValidation",
+    "optional": true,
+    "description": "Set this boolean value to indicate if DNSSEC validation must be done. This optional parameter is to be used with FWD records. Default value is `false`."
+   },
+   {
+    "name": "proxyType",
+    "optional": true,
+    "description": "The type of proxy that must be used for conditional forwarding. This optional parameter is to be used with FWD records. Valid values are [`NoProxy`, `DefaultProxy`, `Http`, `Socks5`]. Default value `DefaultProxy` is used"
+   },
+   {
+    "name": "proxyAddress",
+    "optional": true,
+    "description": "The proxy server address to use when `proxyType` is configured. This optional parameter is to be used with FWD records."
+   },
+   {
+    "name": "proxyPort",
+    "optional": true,
+    "description": "The proxy server port to use when `proxyType` is configured. This optional parameter is to be used with FWD records."
+   },
+   {
+    "name": "proxyUsername",
+    "optional": true,
+    "description": "The proxy server username to use when `proxyType` is configured. This optional parameter is to be used with FWD records."
+   },
+   {
+    "name": "proxyPassword",
+    "optional": true,
+    "description": "The proxy server password to use when `proxyType` is configured. This optional parameter is to be used with FWD records."
+   },
+   {
+    "name": "appName",
+    "optional": true,
+    "description": "This parameter is required for updating the `APP` record."
+   },
+   {
+    "name": "classPath",
+    "optional": true,
+    "description": "This parameter is required for updating the `APP` record."
+   },
+   {
+    "name": "recordData",
+    "optional": true,
+    "description": "This parameter is used for updating the `APP` record as per the DNS app requirements."
+   },
+   {
+    "name": "rdata",
+    "optional": true,
+    "description": "This parameter is used for updating unknown i.e. unsupported record types. The value must be formatted as a hex string or a colon separated hex string."
+   },
+   {
+    "name": "newRData",
+    "optional": true,
+    "description": "This parameter is used for updating unknown i.e. unsupported record types. The new value that must be formatted as a hex string or a colon separated hex string."
+   }
+  ]
+ },
+ {
+  "group": "Authoritative Zone API Calls",
+  "title": "Delete Record",
+  "path": "/api/zones/records/delete",
+  "permission": "Zones: None\\",
+  "params": [
+   {
+    "name": "domain",
+    "optional": false,
+    "description": "The domain name of the zone to delete the record."
+   },
+   {
+    "name": "zone",
+    "optional": true,
+    "description": "The name of the authoritative zone into which the `domain` exists. When unspecified, the closest authoritative zone will be used."
+   },
+   {
+    "name": "type",
+    "optional": false,
+    "description": "The type of the resource record to delete."
+   },
+   {
+    "name": "ipAddress",
+    "optional": true,
+    "description": "This parameter is required when deleting `A` or `AAAA` record."
+   },
+   {
+    "name": "updateSvcbHints",
+    "optional": true,
+    "description": "Set this option to `true` to update any SVCB/HTTPS records in the zone that has Automatic Hints option enabled and matches its target name with the current record's domain name. This option is used for `A` and `AAAA` rec"
+   },
+   {
+    "name": "nameServer",
+    "optional": true,
+    "description": "This parameter is required when deleting `NS` record."
+   },
+   {
+    "name": "ptrName",
+    "optional": true,
+    "description": "This parameter is required when deleting `PTR` record."
+   },
+   {
+    "name": "preference",
+    "optional": true,
+    "description": "This parameter is required when deleting `MX` record."
+   },
+   {
+    "name": "exchange",
+    "optional": true,
+    "description": "This parameter is required when deleting `MX` record."
+   },
+   {
+    "name": "characterStringsBase64",
+    "optional": true,
+    "description": "A comma separated list of character-strings in base64 encoding for deleting `TXT` record."
+   },
+   {
+    "name": "text",
+    "optional": true,
+    "description": "This parameter is required for deleting `TXT` record when `characterStringsBase64` is not used."
+   },
+   {
+    "name": "splitText",
+    "optional": true,
+    "description": "This parameter is used when deleting `TXT` record when `characterStringsBase64` is not used. Default value is set to `false` when unspecified."
+   },
+   {
+    "name": "mailbox",
+    "optional": true,
+    "description": "Set an email address for deleting `RP` record."
+   },
+   {
+    "name": "txtDomain",
+    "optional": true,
+    "description": "Set a `TXT` record's domain name for deleting `RP` record."
+   },
+   {
+    "name": "priority",
+    "optional": true,
+    "description": "This parameter is required when deleting the `SRV` record."
+   },
+   {
+    "name": "weight",
+    "optional": true,
+    "description": "This parameter is required when deleting the `SRV` record."
+   },
+   {
+    "name": "port",
+    "optional": true,
+    "description": "This parameter is required when deleting the `SRV` record."
+   },
+   {
+    "name": "target",
+    "optional": true,
+    "description": "This parameter is required when deleting the `SRV` record."
+   },
+   {
+    "name": "naptrOrder",
+    "optional": true,
+    "description": "This parameter is required when deleting the `NAPTR` record."
+   },
+   {
+    "name": "naptrPreference",
+    "optional": true,
+    "description": "This parameter is required when deleting the `NAPTR` record."
+   },
+   {
+    "name": "naptrFlags",
+    "optional": true,
+    "description": "This parameter is required when deleting the `NAPTR` record."
+   },
+   {
+    "name": "naptrServices",
+    "optional": true,
+    "description": "This parameter is required when deleting the `NAPTR` record."
+   },
+   {
+    "name": "naptrRegexp",
+    "optional": true,
+    "description": "This parameter is required when deleting the `NAPTR` record."
+   },
+   {
+    "name": "naptrReplacement",
+    "optional": true,
+    "description": "This parameter is required when deleting the `NAPTR` record."
+   },
+   {
+    "name": "keyTag",
+    "optional": true,
+    "description": "This parameter is required when deleting `DS` record."
+   },
+   {
+    "name": "algorithm",
+    "optional": true,
+    "description": "This parameter is required when deleting `DS` record."
+   },
+   {
+    "name": "digestType",
+    "optional": true,
+    "description": "This parameter is required when deleting `DS` record."
+   },
+   {
+    "name": "digest",
+    "optional": true,
+    "description": "This parameter is required when deleting `DS` record."
+   },
+   {
+    "name": "sshfpAlgorithm",
+    "optional": true,
+    "description": "This parameter is required when deleting `SSHFP` record."
+   },
+   {
+    "name": "sshfpFingerprintType",
+    "optional": true,
+    "description": "This parameter is required when deleting `SSHFP` record."
+   },
+   {
+    "name": "sshfpFingerprint",
+    "optional": true,
+    "description": "This parameter is required when deleting `SSHFP` record."
+   },
+   {
+    "name": "tlsaCertificateUsage",
+    "optional": true,
+    "description": "This parameter is required when deleting `TLSA` record."
+   },
+   {
+    "name": "tlsaSelector",
+    "optional": true,
+    "description": "This parameter is required when deleting `TLSA` record."
+   },
+   {
+    "name": "tlsaMatchingType",
+    "optional": true,
+    "description": "This parameter is required when deleting `TLSA` record."
+   },
+   {
+    "name": "tlsaCertificateAssociationData",
+    "optional": true,
+    "description": "This parameter is required when deleting `TLSA` record."
+   },
+   {
+    "name": "svcPriority",
+    "optional": true,
+    "description": "The priority value for `SVCB` or `HTTPS` record. This parameter is required for deleting `SCVB` or `HTTPS` record."
+   },
+   {
+    "name": "svcTargetName",
+    "optional": true,
+    "description": "The target domain name for `SVCB` or `HTTPS` record. This parameter is required for deleting `SCVB` or `HTTPS` record."
+   },
+   {
+    "name": "svcParams",
+    "optional": true,
+    "description": "The service parameters for `SVCB` or `HTTPS` record which is a pipe separated list of key and value. For example, `alpn|h2,h3|port|53443`. To clear existing values, set it to `false`. This parameter is required for delet"
+   },
+   {
+    "name": "uriPriority",
+    "optional": true,
+    "description": "The priority value in the `URI` record. This parameter is required when deleting the `URI` record."
+   },
+   {
+    "name": "uriWeight",
+    "optional": true,
+    "description": "The weight value in the `URI` record. This parameter is required when deleting the `URI` record."
+   },
+   {
+    "name": "uri",
+    "optional": true,
+    "description": "The URI value in the `URI` record. This parameter is required when deleting the `URI` record."
+   },
+   {
+    "name": "flags",
+    "optional": true,
+    "description": "This is the flags parameter in the `CAA` record. This parameter is required when deleting the `CAA` record."
+   },
+   {
+    "name": "tag",
+    "optional": true,
+    "description": "This is the tag parameter in the `CAA` record. This parameter is required when deleting the `CAA` record."
+   },
+   {
+    "name": "value",
+    "optional": true,
+    "description": "This parameter is required when deleting the `CAA` record."
+   },
+   {
+    "name": "aname",
+    "optional": true,
+    "description": "This parameter is required when deleting the `ANAME` record."
+   },
+   {
+    "name": "protocol",
+    "optional": true,
+    "description": "This is the protocol parameter in the FWD record. Valid values are [`Udp`, `Tcp`, `Tls`, `Https`, `Quic`]. This parameter is optional and default value `Udp` will be used when deleting the `FWD` record."
+   },
+   {
+    "name": "forwarder",
+    "optional": true,
+    "description": "This parameter is required when deleting the `FWD` record."
+   },
+   {
+    "name": "rdata",
+    "optional": true,
+    "description": "This parameter is used for deleting unknown i.e. unsupported record types. The value must be formatted as a hex string or a colon separated hex string."
+   }
+  ]
+ },
+ {
+  "group": "DNS Cache API Calls",
+  "title": "List Cached Zones",
+  "path": "/api/cache/list",
+  "permission": "Cache: View",
+  "params": [
+   {
+    "name": "domain",
+    "optional": false,
+    "description": "The domain name to list records. If not passed, the domain is set to empty string which corresponds to the zone root."
+   },
+   {
+    "name": "direction",
+    "optional": false,
+    "description": "Allows specifying the direction of browsing the zone. Valid values are [`up`, `down`] and the default value is `down` when parameter is missing. This option allows the server to skip empty labels in the domain name when "
+   }
+  ]
+ },
+ {
+  "group": "DNS Cache API Calls",
+  "title": "Delete Cached Zone",
+  "path": "/api/cache/delete",
+  "permission": "Cache: Delete",
+  "params": [
+   {
+    "name": "domain",
+    "optional": false,
+    "description": "The domain name to delete cached records from."
+   }
+  ]
+ },
+ {
+  "group": "DNS Cache API Calls",
+  "title": "Flush DNS Cache",
+  "path": "/api/cache/flush",
+  "permission": "Cache: Delete",
+  "params": []
+ },
+ {
+  "group": "Allowed Zones API Calls",
+  "title": "List Allowed Zones",
+  "path": "/api/allowed/list",
+  "permission": "Allowed: View",
+  "params": [
+   {
+    "name": "domain",
+    "optional": false,
+    "description": "The domain name to list records. If not passed, the domain is set to empty string which corresponds to the zone root."
+   },
+   {
+    "name": "direction",
+    "optional": false,
+    "description": "Allows specifying the direction of browsing the zone. Valid values are [`up`, `down`] and the default value is `down` when parameter is missing. This option allows the server to skip empty labels in the domain name when "
+   }
+  ]
+ },
+ {
+  "group": "Allowed Zones API Calls",
+  "title": "Allow Zone",
+  "path": "/api/allowed/add",
+  "permission": "Allowed: Modify",
+  "params": [
+   {
+    "name": "domain",
+    "optional": false,
+    "description": "The domain name for the zone to be added."
+   }
+  ]
+ },
+ {
+  "group": "Allowed Zones API Calls",
+  "title": "Delete Allowed Zone",
+  "path": "/api/allowed/delete",
+  "permission": "Allowed: Delete",
+  "params": [
+   {
+    "name": "domain",
+    "optional": false,
+    "description": "The domain name for the zone to be deleted."
+   }
+  ]
+ },
+ {
+  "group": "Allowed Zones API Calls",
+  "title": "Flush Allowed Zone",
+  "path": "/api/allowed/flush",
+  "permission": "Allowed: Delete",
+  "params": []
+ },
+ {
+  "group": "Allowed Zones API Calls",
+  "title": "Import Allowed Zones",
+  "path": "/api/allowed/import",
+  "permission": "Allowed: Modify",
+  "params": [
+   {
+    "name": "allowedZones",
+    "optional": false,
+    "description": "A list of comma separated domain names that are to be imported."
+   }
+  ]
+ },
+ {
+  "group": "Allowed Zones API Calls",
+  "title": "Export Allowed Zones",
+  "path": "/api/allowed/export",
+  "permission": "Allowed: View",
+  "params": []
+ },
+ {
+  "group": "Blocked Zones API Calls",
+  "title": "List Blocked Zones",
+  "path": "/api/blocked/list",
+  "permission": "Blocked: View",
+  "params": [
+   {
+    "name": "domain",
+    "optional": false,
+    "description": "The domain name to list records. If not passed, the domain is set to empty string which corresponds to the zone root."
+   },
+   {
+    "name": "direction",
+    "optional": false,
+    "description": "Allows specifying the direction of browsing the zone. Valid values are [`up`, `down`] and the default value is `down` when parameter is missing. This option allows the server to skip empty labels in the domain name when "
+   }
+  ]
+ },
+ {
+  "group": "Blocked Zones API Calls",
+  "title": "Block Zone",
+  "path": "/api/blocked/add",
+  "permission": "Blocked: Modify",
+  "params": [
+   {
+    "name": "domain",
+    "optional": false,
+    "description": "The domain name for the zone to be added."
+   }
+  ]
+ },
+ {
+  "group": "Blocked Zones API Calls",
+  "title": "Delete Blocked Zone",
+  "path": "/api/blocked/delete",
+  "permission": "Blocked: Delete",
+  "params": [
+   {
+    "name": "domain",
+    "optional": false,
+    "description": "The domain name for the zone to be deleted."
+   }
+  ]
+ },
+ {
+  "group": "Blocked Zones API Calls",
+  "title": "Flush Blocked Zone",
+  "path": "/api/blocked/flush",
+  "permission": "Blocked: Delete",
+  "params": []
+ },
+ {
+  "group": "Blocked Zones API Calls",
+  "title": "Import Blocked Zones",
+  "path": "/api/blocked/import",
+  "permission": "Blocked: Modify",
+  "params": [
+   {
+    "name": "blockedZones",
+    "optional": false,
+    "description": "A list of comma separated domain names that are to be imported."
+   }
+  ]
+ },
+ {
+  "group": "Blocked Zones API Calls",
+  "title": "Export Blocked Zones",
+  "path": "/api/blocked/export",
+  "permission": "Blocked: View",
+  "params": []
+ },
+ {
+  "group": "DNS Apps API Calls",
+  "title": "List Apps",
+  "path": "/api/apps/list",
+  "permission": "Apps/Zones/Logs: View",
+  "params": []
+ },
+ {
+  "group": "DNS Apps API Calls",
+  "title": "List Store Apps",
+  "path": "/api/apps/listStoreApps",
+  "permission": "Apps: View",
+  "params": []
+ },
+ {
+  "group": "DNS Apps API Calls",
+  "title": "Download And Install App",
+  "path": "/api/apps/downloadAndInstall",
+  "permission": "Apps: Delete",
+  "params": [
+   {
+    "name": "name",
+    "optional": false,
+    "description": "The name of the app to install."
+   },
+   {
+    "name": "url",
+    "optional": false,
+    "description": "The URL of the app zip file. URL must start with `https://`."
+   }
+  ]
+ },
+ {
+  "group": "DNS Apps API Calls",
+  "title": "Download And Update App",
+  "path": "/api/apps/downloadAndUpdate",
+  "permission": "Apps: Delete",
+  "params": [
+   {
+    "name": "name",
+    "optional": false,
+    "description": "The name of the app to install."
+   },
+   {
+    "name": "url",
+    "optional": false,
+    "description": "The URL of the app zip file. URL must start with `https://`."
+   }
+  ]
+ },
+ {
+  "group": "DNS Apps API Calls",
+  "title": "Install App",
+  "path": "/api/apps/install",
+  "permission": "Apps: Delete",
+  "params": [
+   {
+    "name": "name",
+    "optional": false,
+    "description": "The name of the app to install."
+   }
+  ]
+ },
+ {
+  "group": "DNS Apps API Calls",
+  "title": "Update App",
+  "path": "/api/apps/update",
+  "permission": "Apps: Delete",
+  "params": [
+   {
+    "name": "name",
+    "optional": false,
+    "description": "The name of the app to update."
+   }
+  ]
+ },
+ {
+  "group": "DNS Apps API Calls",
+  "title": "Uninstall App",
+  "path": "/api/apps/uninstall",
+  "permission": "Apps: Delete",
+  "params": [
+   {
+    "name": "name",
+    "optional": false,
+    "description": "The name of the app to uninstall."
+   }
+  ]
+ },
+ {
+  "group": "DNS Apps API Calls",
+  "title": "Get App Config",
+  "path": "/api/apps/config/get",
+  "permission": "Apps: View",
+  "params": [
+   {
+    "name": "name",
+    "optional": false,
+    "description": "The name of the app to retrieve the config."
+   }
+  ]
+ },
+ {
+  "group": "DNS Apps API Calls",
+  "title": "Set App Config",
+  "path": "/api/apps/config/set",
+  "permission": "Apps: Modify",
+  "params": [
+   {
+    "name": "name",
+    "optional": false,
+    "description": "The name of the app to retrieve the config."
+   }
+  ]
+ },
+ {
+  "group": "DNS Client API Calls",
+  "title": "Resolve Query",
+  "path": "/api/dnsClient/resolve",
+  "permission": "DnsClient: View",
+  "params": [
+   {
+    "name": "server",
+    "optional": false,
+    "description": "The name server to query using the DNS client. Use `recursive-resolver` to perform recursive resolution. Use `system-dns` to query the DNS servers configured on the system."
+   },
+   {
+    "name": "domain",
+    "optional": false,
+    "description": "The domain name to query."
+   },
+   {
+    "name": "type",
+    "optional": false,
+    "description": "The type of the query."
+   },
+   {
+    "name": "protocol",
+    "optional": true,
+    "description": "The DNS transport protocol to be used to query. Valid values are [`Udp`, `Tcp`, `Tls`, `Https`, `Quic`]. The default value of `Udp` is used when the parameter is missing."
+   },
+   {
+    "name": "dnssec",
+    "optional": true,
+    "description": "Set to `true` to enable DNSSEC validation."
+   },
+   {
+    "name": "eDnsClientSubnet",
+    "optional": true,
+    "description": "The network address to be used with EDNS Client Subnet option in the request."
+   },
+   {
+    "name": "import",
+    "optional": true,
+    "description": "This parameter when set to `true` indicates that the response of the DNS query should be imported in the an authoritative zone on this DNS server. Default value is `false` when this parameter is missing. If a zone does n"
+   }
+  ]
+ },
+ {
+  "group": "DNS Client API Calls",
+  "title": "Health Check",
+  "path": "/api/dnsClient/healthCheck",
+  "permission": "DnsClient: View",
+  "params": [
+   {
+    "name": "domain",
+    "optional": true,
+    "description": "The domain name to query. When unspecified, `localhost` is used as the domain name."
+   },
+   {
+    "name": "type",
+    "optional": false,
+    "description": "The type of the query. When unspecified, record type `A` is used."
+   }
+  ]
+ },
+ {
+  "group": "Settings API Calls",
+  "title": "Get DNS Settings",
+  "path": "/api/settings/get",
+  "permission": "Settings: View",
+  "params": []
+ },
+ {
+  "group": "Settings API Calls",
+  "title": "Set DNS Settings",
+  "path": "/api/settings/set",
+  "permission": "Settings: Modify",
+  "params": [
+   {
+    "name": "dnsServerDomain",
+    "optional": true,
+    "description": "The primary domain name used by this DNS Server to identify itself."
+   },
+   {
+    "name": "dnsServerLocalEndPoints",
+    "optional": true,
+    "description": "Local end points are the network interface IP addresses and ports you want the DNS Server to listen for requests."
+   },
+   {
+    "name": "dnsServerIPv4SourceAddresses",
+    "optional": true,
+    "description": "A comma separated list of IPv4 source addresses that the DNS server must use for making all outbound DNS requests when the server is connected to two or more networks. Network addresses are also accepted. By default, the"
+   },
+   {
+    "name": "dnsServerIPv6SourceAddresses",
+    "optional": true,
+    "description": "A comma separated list of IPv6 source addresses that the DNS server must use for making all outbound DNS requests when the server is connected to two or more networks. Network addresses are also accepted. By default, the"
+   },
+   {
+    "name": "defaultRecordTtl",
+    "optional": true,
+    "description": "The default TTL value to use if not specified when adding or updating records in a Zone."
+   },
+   {
+    "name": "defaultNsRecordTtl",
+    "optional": true,
+    "description": "The default TTL value to use if not specified when adding or updating NS records in a Primary Zone."
+   },
+   {
+    "name": "defaultSoaRecordTtl",
+    "optional": true,
+    "description": "The default TTL value to use if not specified when adding or updating SOA records in a Primary Zone."
+   },
+   {
+    "name": "defaultResponsiblePerson",
+    "optional": true,
+    "description": "The default SOA Responsible Person email address to use when adding a Primary Zone."
+   },
+   {
+    "name": "useSoaSerialDateScheme",
+    "optional": true,
+    "description": "The default SOA Serial option to use if not specified when adding a Primary Zone."
+   },
+   {
+    "name": "minSoaRefresh",
+    "optional": true,
+    "description": "The minimum Refresh interval to be used by Secondary, Stub, Secondary Forwarder, and Secondary Catalog zones. This value will be used if a zone's SOA Refresh value is less than the minimum value. Initial value is `300`."
+   },
+   {
+    "name": "minSoaRetry",
+    "optional": true,
+    "description": "The minimum Retry interval to be used by Secondary, Stub, Secondary Forwarder, and Secondary Catalog zones zones. This value will be used if a zone's SOA Retry value is less than the minimum value. Initial value is `300`"
+   },
+   {
+    "name": "zoneTransferAllowedNetworks",
+    "optional": true,
+    "description": "A comma separated list of IP addresses or network addresses that are allowed to perform zone transfer for all zones without any TSIG authentication."
+   },
+   {
+    "name": "notifyAllowedNetworks",
+    "optional": true,
+    "description": "A comma separated list of IP addresses or network addresses that are allowed to Notify all secondary zones."
+   },
+   {
+    "name": "dnsServerEnableCheckForUpdate",
+    "optional": true,
+    "description": "Set to `true` to enable the DNS Server to check if an update is available when the Check For Update API is called which usually occurs after a user logs into the Web Console."
+   },
+   {
+    "name": "dnsAppsEnableAutomaticUpdate",
+    "optional": true,
+    "description": "Set to `true` to allow DNS server to automatically update the DNS Apps from the DNS App Store. The DNS Server will check for updates every 24 hrs when this option is enabled."
+   },
+   {
+    "name": "ipv6Mode",
+    "optional": true,
+    "description": "Valid options are `Disabled`, `Enabled`, and `Preferred`. Initial value is `Disabled`."
+   },
+   {
+    "name": "enableUdpSocketPool",
+    "optional": true,
+    "description": "Set this to `true` to enable UDP socket pool. The DNS Server will use UDP socket pool for all outbound DNS-over-UDP requests when enabled."
+   },
+   {
+    "name": "socketPoolExcludedPorts",
+    "optional": true,
+    "description": "A comma separated list of port numbers that must be excluded from being used by the UDP socket pool."
+   },
+   {
+    "name": "udpPayloadSize",
+    "optional": true,
+    "description": "The maximum EDNS UDP payload size that can be used to avoid IP fragmentation. Valid range is 512-4096 bytes. Initial value is `1232`."
+   },
+   {
+    "name": "dnssecValidation",
+    "optional": true,
+    "description": "Set this to `true` to enable DNSSEC validation. DNS Server will validate all responses from name servers or forwarders when this option is enabled."
+   },
+   {
+    "name": "eDnsClientSubnet",
+    "optional": true,
+    "description": "Set this to `true` to enable EDNS Client Subnet. DNS Server will use the public IP address of the request with a prefix length, or the existing Client Subnet option from the request while resolving requests."
+   },
+   {
+    "name": "eDnsClientSubnetIPv4PrefixLength",
+    "optional": true,
+    "description": "The EDNS Client Subnet IPv4 prefix length to define the client subnet. Initial value is `24`."
+   },
+   {
+    "name": "eDnsClientSubnetIPv6PrefixLength",
+    "optional": true,
+    "description": "The EDNS Client Subnet IPv6 prefix length to define the client subnet. Initial value is `56`."
+   },
+   {
+    "name": "eDnsClientSubnetIpv4Override",
+    "optional": true,
+    "description": "The IPv4 network address that must be used as ECS for all outbound requests overriding client's actual subnet."
+   },
+   {
+    "name": "eDnsClientSubnetIpv6Override",
+    "optional": true,
+    "description": "The IPv6 network address that must be used as ECS for all outbound requests overriding client's actual subnet."
+   },
+   {
+    "name": "qpmPrefixLimitsIPv4",
+    "optional": true,
+    "description": "A pipe `|` separated multi row list of prefix, udpLimit and tcpLimit. Set this parameter to `false` to remove all entries. The maximum queries an IPv4 client subnet can make to DNS-over-UDP and DNS-over-TCP protocol serv"
+   },
+   {
+    "name": "qpmPrefixLimitsIPv6",
+    "optional": true,
+    "description": "A pipe `|` separated multi row list of prefix, udpLimit and tcpLimit. Set this parameter to `false` to remove all entries. The maximum queries an IPv6 client subnet can make to DNS-over-UDP and DNS-over-TCP protocol serv"
+   },
+   {
+    "name": "qpmLimitSampleMinutes",
+    "optional": true,
+    "description": "Sets the client query stats sample size in minutes for QPM limit feature. Initial value is `5`."
+   },
+   {
+    "name": "qpmLimitUdpTruncationPercentage",
+    "optional": true,
+    "description": "The percentage of requests that are responded with a truncation (TC) response when QPM limit exceeds for DNS-over-UDP protocol service while the rest of the requests are dropped. A TC response will cause a real client to"
+   },
+   {
+    "name": "qpmLimitBypassList",
+    "optional": true,
+    "description": "A comma separated list of IP addresses or network addresses that are allowed to bypass the QPM limit."
+   },
+   {
+    "name": "clientTimeout",
+    "optional": true,
+    "description": "The amount of time the DNS server must wait in milliseconds before responding with a ServerFailure response to a client request when no answer is available. Valid range is `1000`-`10000`. Initial value is `4000`."
+   },
+   {
+    "name": "tcpSendTimeout",
+    "optional": true,
+    "description": "The maximum amount of time in milliseconds a TCP socket will wait for the response to be sent. This option will apply for DNS requests being received by the DNS Server over TCP, TLS, TcpProxy, or HTTPS transports. Valid "
+   },
+   {
+    "name": "tcpReceiveTimeout",
+    "optional": true,
+    "description": "The maximum amount of time in milliseconds a TCP socket will wait for receiving data. This option will apply for DNS requests being received by the DNS Server over TCP, TLS, TcpProxy, or HTTPS transports. Valid range is "
+   },
+   {
+    "name": "quicIdleTimeout",
+    "optional": true,
+    "description": "The time interval in milliseconds after which an idle QUIC connection will be closed. This option applies only to QUIC transport protocol. Valid range is `1000`-`90000`. Initial value is `60000`."
+   },
+   {
+    "name": "quicMaxInboundStreams",
+    "optional": true,
+    "description": "The max number of inbound bidirectional streams that can be accepted per QUIC connection. This option applies only to QUIC transport protocol. Valid range is `1`-`1000`. Initial value is `100`."
+   },
+   {
+    "name": "listenBacklog",
+    "optional": true,
+    "description": "The maximum number of pending inbound connections. This option applies to TCP, TLS, TcpProxy, and QUIC transport protocols. Initial value is `100`."
+   },
+   {
+    "name": "udpSendBufferSizeKB",
+    "optional": true,
+    "description": "The UDP listener socket send buffer size. This option applies to UDP and UdpProxy transport protocols. Valid range is 8-65536. Initial value is 2048."
+   },
+   {
+    "name": "udpReceiveBufferSizeKB",
+    "optional": true,
+    "description": "The UDP listener socket receive buffer size. This option applies to UDP and UdpProxy transport protocols. Valid range is 8-65536. Initial value is 2048."
+   },
+   {
+    "name": "maxConcurrentResolutionsPerCore",
+    "optional": true,
+    "description": "The maximum number of concurrent async outbound resolutions that should be done per CPU core.  Initial value is `100`."
+   },
+   {
+    "name": "webServiceLocalAddresses",
+    "optional": true,
+    "description": "Local addresses are the network interface IP addresses you want the web service to listen for requests."
+   },
+   {
+    "name": "webServiceHttpPort",
+    "optional": true,
+    "description": "Specify the TCP port number for the web console and this API web service. Initial value is `5380`."
+   },
+   {
+    "name": "webServiceEnableHttpUnixSocket",
+    "optional": true,
+    "description": "Set this to `true` to enable Web Service HTTP over Unix Domain Socket (UDS)."
+   },
+   {
+    "name": "webServiceHttpUnixSocket",
+    "optional": true,
+    "description": "Specify the Unix Domain Sockets (UDS) file path for HTTP Web Service. Ensure that the DNS Server has read+write permissions to the parent directory to be able to create the UDS file."
+   },
+   {
+    "name": "webServiceEnableTlsUnixSocket",
+    "optional": true,
+    "description": "Set this to `true` to enable Web Service HTTPS over Unix Domain Socket (UDS)."
+   },
+   {
+    "name": "webServiceTlsUnixSocket",
+    "optional": true,
+    "description": "Specify the Unix Domain Sockets (UDS) file path for HTTPS Web Service. Ensure that the DNS Server has read+write permissions to the parent directory to be able to create the UDS file."
+   },
+   {
+    "name": "webServiceEnableTls",
+    "optional": true,
+    "description": "Set this to `true` to start the HTTPS service to access web service."
+   },
+   {
+    "name": "webServiceEnableHttp3",
+    "optional": true,
+    "description": "Set this to `true` to enable HTTP/3 protocol for the web service."
+   },
+   {
+    "name": "webServiceHttpToTlsRedirect",
+    "optional": true,
+    "description": "Set this option to `true` to enable HTTP to HTTPS Redirection."
+   },
+   {
+    "name": "webServiceTlsPort",
+    "optional": true,
+    "description": "Specified the TCP port number for the web console for HTTPS access."
+   },
+   {
+    "name": "webServiceReverseProxyAddresses",
+    "optional": true,
+    "description": "A comma separated list of ACL entries which can be an IP address or a network address. Configure the ACL to define allowed reverse proxy servers such that client IP address from requests coming from these servers is read"
+   },
+   {
+    "name": "webServiceUseSelfSignedTlsCertificate",
+    "optional": true,
+    "description": "Set `true` for the web service to use an automatically generated self signed certificate when TLS certificate path is not specified."
+   },
+   {
+    "name": "webServiceTlsCertificatePath",
+    "optional": true,
+    "description": "Specify a PKCS #12 certificate (.pfx) file path on the server. The certificate must contain private key. This certificate is used by the web console for HTTPS access."
+   },
+   {
+    "name": "webServiceTlsCertificatePassword",
+    "optional": true,
+    "description": "Enter the certificate (.pfx) password, if any."
+   },
+   {
+    "name": "webServiceRealIpHeader",
+    "optional": true,
+    "description": "The HTTP header that must be used to read client's actual IP address when the request comes from a reverse proxy with a private IP address."
+   },
+   {
+    "name": "webServiceCspFrameAncestorsHeader",
+    "optional": true,
+    "description": "The Content Security Policy (CSP) Frame Ancestors header value that must be used when serving the Web Console."
+   },
+   {
+    "name": "enableEDnsClientSubnetSourceAddress",
+    "optional": true,
+    "description": "Enable this option to read the client's source IP address from the EDNS Client Subnet (ECS) option in the DNS requests coming via DNS-over-UDP or DNS-over-TCP protocols. This option allows a DNS proxy to pass the client'"
+   },
+   {
+    "name": "enableDnsOverUdpProxy",
+    "optional": true,
+    "description": "Enable this option to accept DNS-over-UDP-PROXY requests. It implements the [PROXY Protocol](https://www.haproxy.org/download/1.8/doc/proxy-protocol.txt) for both version 1 & 2 over UDP datagram. Configure the `dnsRevers"
+   },
+   {
+    "name": "enableDnsOverTcpProxy",
+    "optional": true,
+    "description": "Enable this option to accept DNS-over-TCP-PROXY requests. It implements the [PROXY Protocol](https://www.haproxy.org/download/1.8/doc/proxy-protocol.txt) for both version 1 & 2 over TCP connection. Configure the `dnsReve"
+   },
+   {
+    "name": "enableDnsOverHttp",
+    "optional": true,
+    "description": "Enable this option to accept DNS-over-HTTP requests. It must be used with a TLS terminating reverse proxy like nginx. Configure the `dnsReverseProxyNetworkACL` option to allow only requests coming from your reverse proxy"
+   },
+   {
+    "name": "enableDnsOverHttpUnixSocket",
+    "optional": true,
+    "description": "Enable this option to accept DNS-over-HTTP requests over Unix Domain Sockets (UDS)."
+   },
+   {
+    "name": "enableDnsOverHttpsUnixSocket",
+    "optional": true,
+    "description": "Enable this option to accept DNS-over-HTTPS requests over Unix Domain Sockets (UDS)."
+   },
+   {
+    "name": "enableDnsOverTls",
+    "optional": true,
+    "description": "Enable this option to accept DNS-over-TLS requests."
+   },
+   {
+    "name": "enableDnsOverHttps",
+    "optional": true,
+    "description": "Enable this option to accept DNS-over-HTTPS requests."
+   },
+   {
+    "name": "enableDnsOverQuic",
+    "optional": true,
+    "description": "Enable this option to accept DNS-over-QUIC requests."
+   },
+   {
+    "name": "enableDnsOverHttpHelpRedirect",
+    "optional": true,
+    "description": "When this option is enabled, if a user visits the `/dns-query` DNS-over-HTTP(s) URL path using a web browser, the web browser will be redirected to `/` URL path to display the help page for the DNS-over-HTTP(s) service."
+   },
+   {
+    "name": "dnsOverUdpProxyPort",
+    "optional": true,
+    "description": "The UDP port number for DNS-over-UDP-PROXY protocol. Initial value is `538`."
+   },
+   {
+    "name": "dnsOverTcpProxyPort",
+    "optional": true,
+    "description": "The TCP port number for DNS-over-TCP-PROXY protocol. Initial value is `538`."
+   },
+   {
+    "name": "dnsOverHttpPort",
+    "optional": true,
+    "description": "The TCP port number for DNS-over-HTTP protocol. Initial value is `80`."
+   },
+   {
+    "name": "dnsOverHttpUnixSocket",
+    "optional": true,
+    "description": "Specify the Unix Domain Sockets (UDS) file path for DNS-over-HTTP protocol service. Ensure that the DNS Server has read+write permissions to the parent directory to be able to create the UDS file."
+   },
+   {
+    "name": "dnsOverHttpsUnixSocket",
+    "optional": true,
+    "description": "Specify the Unix Domain Sockets (UDS) file path for DNS-over-HTTPS protocol service. Ensure that the DNS Server has read+write permissions to the parent directory to be able to create the UDS file."
+   },
+   {
+    "name": "dnsOverTlsPort",
+    "optional": true,
+    "description": "The TCP port number for DNS-over-TLS protocol. Initial value is `853`."
+   },
+   {
+    "name": "dnsOverHttpsPort",
+    "optional": true,
+    "description": "The TCP port number for DNS-over-HTTPS protocol. Initial value is `443`."
+   },
+   {
+    "name": "dnsOverQuicPort",
+    "optional": true,
+    "description": "The UDP port number for DNS-over-QUIC protocol. Initial value is `853`."
+   },
+   {
+    "name": "dnsReverseProxyNetworkACL",
+    "optional": true,
+    "description": "A comma separated list of ACL entries which can be an IP address or a network address. Configure the ACL to allow only requests coming from your reverse proxy server for DNS-over-UDP-PROXY, DNS-over-TCP-PROXY, and DNS-ov"
+   },
+   {
+    "name": "dnsTlsCertificatePath",
+    "optional": true,
+    "description": "Specify a PKCS #12 certificate (.pfx) file path on the server. The certificate must contain private key. This certificate is used by the DNS-over-TLS and DNS-over-HTTPS optional protocols."
+   },
+   {
+    "name": "dnsTlsCertificatePassword",
+    "optional": true,
+    "description": "Enter the certificate (.pfx) password, if any."
+   },
+   {
+    "name": "dnsOverHttpRealIpHeader",
+    "optional": true,
+    "description": "The HTTP header that must be used to read client's actual IP address when the request comes from a reverse proxy with a private IP address."
+   },
+   {
+    "name": "tsigKeys",
+    "optional": true,
+    "description": "A pipe `|` separated multi row list of TSIG key name, shared secret, and algorithm. Set this parameter to `false` to remove all existing keys. Supported algorithms are [`hmac-md5.sig-alg.reg.int`, `hmac-sha1`, `hmac-sha2"
+   },
+   {
+    "name": "recursion",
+    "optional": true,
+    "description": "Sets the recursion policy for the DNS server. Valid values are [`Deny`, `Allow`, `AllowOnlyForPrivateNetworks`, `UseSpecifiedNetworkACL`]."
+   },
+   {
+    "name": "recursionNetworkACL",
+    "optional": true,
+    "description": "A comma separated Access Control List (ACL) of Network Access Control (NAC) entry. NAC is an IP address or network address to allow. Add `!` at the start of the NAC to deny access. The ACL is processed in the same order "
+   },
+   {
+    "name": "randomizeName",
+    "optional": true,
+    "description": "Enables QNAME randomization [draft-vixie-dnsext-dns0x20-00](https://tools.ietf.org/html/draft-vixie-dnsext-dns0x20-00) when using UDP as the transport protocol. Initial value is `true`."
+   },
+   {
+    "name": "qnameMinimization",
+    "optional": true,
+    "description": "Enables QNAME minimization [draft-ietf-dnsop-rfc7816bis-04](https://tools.ietf.org/html/draft-ietf-dnsop-rfc7816bis-04) when doing recursive resolution. Initial value is `true`."
+   },
+   {
+    "name": "locallyServedDnsZones",
+    "optional": true,
+    "description": "Enables [Locally Served DNS Zones](https://datatracker.ietf.org/doc/rfc6303/) and [Special-Use Domain Names](https://datatracker.ietf.org/doc/rfc6761/) for recursive resolution to avoid leakage of queries and reduce load"
+   },
+   {
+    "name": "resolverRetries",
+    "optional": true,
+    "description": "The number of retries that the recursive resolver must do."
+   },
+   {
+    "name": "resolverTimeout",
+    "optional": true,
+    "description": "The timeout value in milliseconds for the recursive resolver."
+   },
+   {
+    "name": "resolverConcurrency",
+    "optional": true,
+    "description": "The number of concurrent requests that should be sent by the recursive resolver to the name servers."
+   },
+   {
+    "name": "resolverMaxStackCount",
+    "optional": true,
+    "description": "The max stack count that the recursive resolver must use."
+   },
+   {
+    "name": "saveCache",
+    "optional": true,
+    "description": "Enable this option to save DNS cache on disk when the DNS server stops. The saved cache will be loaded next time the DNS server starts."
+   },
+   {
+    "name": "serveStale",
+    "optional": true,
+    "description": "Enable the serve stale feature to improve resiliency by using expired or stale records in cache when the DNS server is unable to reach the upstream or authoritative name servers. Initial value is `true`."
+   },
+   {
+    "name": "serveStaleTtl",
+    "optional": true,
+    "description": "The TTL value in seconds which should be used for cached records that are expired. When the serve stale TTL too expires for a stale record, it gets removed from the cache. Recommended value is between 1-3 days and maximu"
+   },
+   {
+    "name": "serveStaleAnswerTtl",
+    "optional": true,
+    "description": "The TTL value in seconds which should be used for the records in a stale response. This is the TTL value that the client will be using to cache the stale records. The valid range is 0-300 seconds and recommended value is"
+   },
+   {
+    "name": "serveStaleResetTtl",
+    "optional": true,
+    "description": "The TTL value in seconds which should be used to reset the stale record's TTL value in the cache when the resolver fails to refresh the data. The TTL reset causes the stale records to become valid again so that they can "
+   },
+   {
+    "name": "serveStaleMaxWaitTime",
+    "optional": true,
+    "description": "The time in milliseconds that the DNS server must wait for the resolver before serving stale records from the cache. Lower value will ensure faster response at the expense of not getting updated data from the upstream. S"
+   },
+   {
+    "name": "cacheMinimumRecordTtl",
+    "optional": true,
+    "description": "The minimum TTL value that a record can have in cache. Set a value to make sure that the records with TTL value than it stays in cache for a minimum duration. Initial value is `10`."
+   },
+   {
+    "name": "cacheMaximumRecordTtl",
+    "optional": true,
+    "description": "The maximum TTL value that a record can have in cache. Set a lower value to allow the records to expire early. Initial value is `86400`."
+   },
+   {
+    "name": "cacheNegativeRecordTtl",
+    "optional": true,
+    "description": "The negative TTL value to use when there is no SOA MINIMUM value available. Initial value is `300`."
+   },
+   {
+    "name": "cacheFailureRecordTtl",
+    "optional": true,
+    "description": "The failure TTL value to used for caching failure responses. This allows storing failure record in cache and prevent frequent recursive resolution to name servers that are responding with `ServerFailure`. Initial value i"
+   },
+   {
+    "name": "cachePrefetchEligibility",
+    "optional": true,
+    "description": "The minimum initial TTL value of a record needed to be eligible for prefetching."
+   },
+   {
+    "name": "cachePrefetchTrigger",
+    "optional": true,
+    "description": "A record with TTL value less than trigger value will initiate prefetch operation immediately for itself. Set `0` to disable prefetching & auto prefetching."
+   },
+   {
+    "name": "enableBlocking",
+    "optional": true,
+    "description": "Sets the DNS server to block domain names using Blocked Zone and Block List Zone."
+   },
+   {
+    "name": "allowTxtBlockingReport",
+    "optional": true,
+    "description": "Specifies if the DNS Server should respond with TXT records containing a blocked domain report for TXT type requests."
+   },
+   {
+    "name": "blockingBypassList",
+    "optional": true,
+    "description": "A comma separated list of IP addresses or network addresses that are allowed to bypass blocking."
+   },
+   {
+    "name": "blockingType",
+    "optional": true,
+    "description": "Sets how the DNS server should respond to a blocked domain request. Valid values are [`AnyAddress`, `NxDomain`, `CustomAddress`] where `AnyAddress` is default which response with `0.0.0.0` and `::` IP addresses for block"
+   },
+   {
+    "name": "blockingAnswerTtl",
+    "optional": true,
+    "description": "The TTL value in seconds that must be used for the records in a blocking response. This is the TTL value that the client will use to cache the blocking response."
+   },
+   {
+    "name": "customBlockingAddresses",
+    "optional": true,
+    "description": "A comma separated list of IP addresses. Set the custom blocking addresses to be used for blocked domain response. These addresses are returned only when `blockingType` is set to `CustomAddress`."
+   },
+   {
+    "name": "blockListUrls",
+    "optional": true,
+    "description": "A comma separated list of block list URLs that this server must automatically download and use with the block lists zone. DNS Server will use the data returned by the block list URLs to update the block list zone automat"
+   },
+   {
+    "name": "blockListUpdateIntervalHours",
+    "optional": true,
+    "description": "The interval in hours to automatically download and update the block lists. Initial value is `24`."
+   },
+   {
+    "name": "proxyType",
+    "optional": true,
+    "description": "The type of proxy protocol to be used. Valid values are [`None`, `Http`, `Socks5`]."
+   },
+   {
+    "name": "proxyAddress",
+    "optional": true,
+    "description": "The proxy server hostname or IP address."
+   },
+   {
+    "name": "proxyPort",
+    "optional": true,
+    "description": "The proxy server port."
+   },
+   {
+    "name": "proxyUsername",
+    "optional": true,
+    "description": "The proxy server username."
+   },
+   {
+    "name": "proxyPassword",
+    "optional": true,
+    "description": "The proxy server password."
+   },
+   {
+    "name": "proxyBypass",
+    "optional": true,
+    "description": "A comma separated bypass list consisting of IP addresses, network addresses in CIDR format, or host/domain names to never use proxy for."
+   },
+   {
+    "name": "forwarders",
+    "optional": true,
+    "description": "A comma separated list of forwarders to be used by this DNS server. Set this parameter to `false` string to remove existing forwarders so that the DNS server does recursive resolution by itself."
+   },
+   {
+    "name": "forwarderProtocol",
+    "optional": true,
+    "description": "The forwarder DNS transport protocol to be used. Valid values are [`Udp`, `Tcp`, `Tls`, `Https`, `Quic`]."
+   },
+   {
+    "name": "concurrentForwarding",
+    "optional": true,
+    "description": "Set this option to `true` to allow querying two or more forwarders concurrently instead of sequentially querying them in their given order. The DNS server will automatically select forwarders (based on their average late"
+   },
+   {
+    "name": "forwarderRetries",
+    "optional": true,
+    "description": "The number of retries that the forwarder DNS client must do."
+   },
+   {
+    "name": "forwarderTimeout",
+    "optional": true,
+    "description": "The timeout value in milliseconds for the forwarder DNS client."
+   },
+   {
+    "name": "forwarderConcurrency",
+    "optional": true,
+    "description": "The number of concurrent requests that the forwarder DNS client should do."
+   },
+   {
+    "name": "loggingType",
+    "optional": true,
+    "description": "Specifies how the error logs and audit logs are written. The valid values are [`None`, `File`, `Console`, `FileAndConsole`]. Initial value is `File`."
+   },
+   {
+    "name": "enableLogging",
+    "optional": true,
+    "description": "Enable this option to log error and audit logs into the log file. Initial value is `true`."
+   },
+   {
+    "name": "ignoreResolverLogs",
+    "optional": true,
+    "description": "Enable this option to stop logging domain name resolution errors into the log file."
+   },
+   {
+    "name": "logQueries",
+    "optional": true,
+    "description": "Enable this option to log every query received by this DNS Server and the corresponding response answers into the log file.  Initial value is `false`."
+   },
+   {
+    "name": "noStackTrace",
+    "optional": true,
+    "description": "Enable to log only short error messages instead of full exception stack trace."
+   },
+   {
+    "name": "useLocalTime",
+    "optional": true,
+    "description": "Enable this option to use local time instead of UTC for logging.  Initial value is `false`."
+   },
+   {
+    "name": "logFolder",
+    "optional": true,
+    "description": "The folder path on the server where the log files should be saved. The path can be relative to the DNS server config folder. Initial value is `logs`."
+   },
+   {
+    "name": "maxLogFileDays",
+    "optional": true,
+    "description": "Max number of days to keep the log files. Log files older than the specified number of days will be deleted automatically. Recommended value is `365`. Set `0` to disable auto delete."
+   },
+   {
+    "name": "enableInMemoryStats",
+    "optional": true,
+    "description": "Set this option to `true` to enable in-memory stats. When enabled, only Last Hour data will be available on Dashboard and no stats data will be stored on disk."
+   },
+   {
+    "name": "maxStatFileDays",
+    "optional": true,
+    "description": "Max number of days to keep the dashboard stats. Stat files older than the specified number of days will be deleted automatically. Recommended value is `365`. Set `0` to disable auto delete."
+   }
+  ]
+ },
+ {
+  "group": "Settings API Calls",
+  "title": "Get TSIG Key Names",
+  "path": "/api/settings/getTsigKeyNames",
+  "permission": "Settings: View OR Zones: Modify",
+  "params": []
+ },
+ {
+  "group": "Settings API Calls",
+  "title": "Force Update Block Lists",
+  "path": "/api/settings/forceUpdateBlockLists",
+  "permission": "Settings: Modify",
+  "params": []
+ },
+ {
+  "group": "Settings API Calls",
+  "title": "Temporarily Disable Block Lists",
+  "path": "/api/settings/temporaryDisableBlocking",
+  "permission": "Settings: Modify",
+  "params": [
+   {
+    "name": "minutes",
+    "optional": false,
+    "description": "The time in minutes to disable the blocklist for."
+   }
+  ]
+ },
+ {
+  "group": "Settings API Calls",
+  "title": "Backup Settings",
+  "path": "/api/settings/backup",
+  "permission": "Settings: Delete",
+  "params": [
+   {
+    "name": "authConfig",
+    "optional": true,
+    "description": "Set to `true` to backup the authentication config file. Default value is `false`."
+   },
+   {
+    "name": "clusterConfig",
+    "optional": true,
+    "description": "Set to `true` to backup the Cluster config file. Default value is `false`."
+   },
+   {
+    "name": "webServiceSettings",
+    "optional": true,
+    "description": "Set to `true` to backup the web service config file. Default value is `false`."
+   },
+   {
+    "name": "dnsSettings",
+    "optional": true,
+    "description": "Set to `true` to backup DNS settings and certificate files. The Web Service or Optional Protocols TLS certificate (.pfx) files will be included in the backup only if they exist within the DNS server's config folder. Defa"
+   },
+   {
+    "name": "logSettings",
+    "optional": true,
+    "description": "Set to `true` to backup log settings file. Default value is `false`."
+   },
+   {
+    "name": "zones",
+    "optional": true,
+    "description": "Set to `true` to backup DNS zone files. Default value is `false`."
+   },
+   {
+    "name": "allowedZones",
+    "optional": true,
+    "description": "Set to `true` to backup allowed zones file. Default value is `false`."
+   },
+   {
+    "name": "blockedZones",
+    "optional": true,
+    "description": "Set to `true` to backup blocked zones file. Default value is `false`."
+   },
+   {
+    "name": "blockLists",
+    "optional": true,
+    "description": "Set to `true` to backup block lists cache files. Default value is `false`."
+   },
+   {
+    "name": "apps",
+    "optional": true,
+    "description": "Set to `true` to backup the installed DNS apps. Default value is `false`."
+   },
+   {
+    "name": "scopes",
+    "optional": true,
+    "description": "Set to `true` to backup DHCP scope files. Default value is `false`."
+   },
+   {
+    "name": "stats",
+    "optional": true,
+    "description": "Set to `true` to backup dashboard stats files. Default value is `false`."
+   },
+   {
+    "name": "logs",
+    "optional": true,
+    "description": "Set to `true` to backup log files. Default value is `false`."
+   }
+  ]
+ },
+ {
+  "group": "Settings API Calls",
+  "title": "Restore Settings",
+  "path": "/api/settings/restore",
+  "permission": "Settings: Delete",
+  "params": [
+   {
+    "name": "authConfig",
+    "optional": true,
+    "description": "Set to `true` to restore the authentication config file. Default value is `false`."
+   },
+   {
+    "name": "clusterConfig",
+    "optional": true,
+    "description": "Set to `true` to restore the Cluster config file. Default value is `false`."
+   },
+   {
+    "name": "webServiceSettings",
+    "optional": true,
+    "description": "Set to `true` to restore the web service config file. Default value is `false`."
+   },
+   {
+    "name": "dnsSettings",
+    "optional": true,
+    "description": "Set to `true` to restore DNS settings and certificate files. Default value is `false`."
+   },
+   {
+    "name": "logSettings",
+    "optional": true,
+    "description": "Set to `true` to restore log settings file. Default value is `false`."
+   },
+   {
+    "name": "zones",
+    "optional": true,
+    "description": "Set to `true` to restore DNS zone files. Default value is `false`."
+   },
+   {
+    "name": "allowedZones",
+    "optional": true,
+    "description": "Set to `true` to restore allowed zones file. Default value is `false`."
+   },
+   {
+    "name": "blockedZones",
+    "optional": true,
+    "description": "Set to `true` to restore blocked zones file. Default value is `false`."
+   },
+   {
+    "name": "blockLists",
+    "optional": true,
+    "description": "Set to `true` to restore block lists cache files. Default value is `false`."
+   },
+   {
+    "name": "apps",
+    "optional": true,
+    "description": "Set to `true` to restore the DNS apps. Default value is `false`."
+   },
+   {
+    "name": "scopes",
+    "optional": true,
+    "description": "Set to `true` to restore DHCP scope files. Default value is `false`."
+   },
+   {
+    "name": "stats",
+    "optional": true,
+    "description": "Set to `true` to restore dashboard stats files. Default value is `false`."
+   },
+   {
+    "name": "logs",
+    "optional": true,
+    "description": "Set to `true` to restore log files. Default value is `false`."
+   },
+   {
+    "name": "deleteExistingFiles",
+    "optional": true,
+    "description": "Set to `true` to delete existing files for selected items. Default value is `false`."
+   }
+  ]
+ },
+ {
+  "group": "DHCP API Calls",
+  "title": "List DHCP Leases",
+  "path": "/api/dhcp/leases/list",
+  "permission": "DhcpServer: View",
+  "params": []
+ },
+ {
+  "group": "DHCP API Calls",
+  "title": "Remove DHCP Lease",
+  "path": "/api/dhcp/leases/remove",
+  "permission": "DhcpServer: Delete",
+  "params": [
+   {
+    "name": "name",
+    "optional": false,
+    "description": "The name of the DHCP scope."
+   },
+   {
+    "name": "clientIdentifier",
+    "optional": true,
+    "description": "The client identifier for the lease. Either `hardwareAddress` or `clientIdentifier` must be specified."
+   },
+   {
+    "name": "hardwareAddress",
+    "optional": true,
+    "description": "The MAC address of the device bearing the dynamic/reserved lease. Either `hardwareAddress` or `clientIdentifier` must be specified."
+   }
+  ]
+ },
+ {
+  "group": "DHCP API Calls",
+  "title": "Convert To Reserved Lease",
+  "path": "/api/dhcp/leases/convertToReserved",
+  "permission": "DhcpServer: Modify",
+  "params": [
+   {
+    "name": "name",
+    "optional": false,
+    "description": "The name of the DHCP scope."
+   },
+   {
+    "name": "clientIdentifier",
+    "optional": true,
+    "description": "The client identifier for the lease. Either `hardwareAddress` or `clientIdentifier` must be specified."
+   },
+   {
+    "name": "hardwareAddress",
+    "optional": true,
+    "description": "The MAC address of the device bearing the dynamic lease. Either `hardwareAddress` or `clientIdentifier` must be specified."
+   }
+  ]
+ },
+ {
+  "group": "DHCP API Calls",
+  "title": "Convert To Dynamic Lease",
+  "path": "/api/dhcp/leases/convertToDynamic",
+  "permission": "DhcpServer: Modify",
+  "params": [
+   {
+    "name": "name",
+    "optional": false,
+    "description": "The name of the DHCP scope."
+   },
+   {
+    "name": "clientIdentifier",
+    "optional": true,
+    "description": "The client identifier for the lease. Either `hardwareAddress` or `clientIdentifier` must be specified."
+   },
+   {
+    "name": "hardwareAddress",
+    "optional": true,
+    "description": "The MAC address of the device bearing the reserved lease. Either `hardwareAddress` or `clientIdentifier` must be specified."
+   }
+  ]
+ },
+ {
+  "group": "DHCP API Calls",
+  "title": "List DHCP Scopes",
+  "path": "/api/dhcp/scopes/list",
+  "permission": "DhcpServer: View",
+  "params": []
+ },
+ {
+  "group": "DHCP API Calls",
+  "title": "Get DHCP Scope",
+  "path": "/api/dhcp/scopes/get",
+  "permission": "DhcpServer: View",
+  "params": [
+   {
+    "name": "name",
+    "optional": false,
+    "description": "The name of the DHCP scope."
+   }
+  ]
+ },
+ {
+  "group": "DHCP API Calls",
+  "title": "Set DHCP Scope",
+  "path": "/api/dhcp/scopes/set",
+  "permission": "DhcpServer: Modify",
+  "params": [
+   {
+    "name": "name",
+    "optional": false,
+    "description": "The name of the DHCP scope."
+   },
+   {
+    "name": "newName",
+    "optional": true,
+    "description": "The new name of the DHCP scope to rename an existing scope."
+   },
+   {
+    "name": "startingAddress",
+    "optional": true,
+    "description": "The starting IP address of the DHCP scope. This parameter is required when creating a new scope."
+   },
+   {
+    "name": "endingAddress",
+    "optional": true,
+    "description": "The ending IP address of the DHCP scope. This parameter is required when creating a new scope."
+   },
+   {
+    "name": "subnetMask",
+    "optional": true,
+    "description": "The subnet mask of the network. This parameter is required when creating a new scope."
+   },
+   {
+    "name": "leaseTimeDays",
+    "optional": true,
+    "description": "The lease time in number of days."
+   },
+   {
+    "name": "leaseTimeHours",
+    "optional": true,
+    "description": "The lease time in number of hours."
+   },
+   {
+    "name": "leaseTimeMinutes",
+    "optional": true,
+    "description": "The lease time in number of minutes."
+   },
+   {
+    "name": "offerDelayTime",
+    "optional": true,
+    "description": "The time duration in milliseconds that the DHCP server delays sending an DHCPOFFER message."
+   },
+   {
+    "name": "pingCheckEnabled",
+    "optional": true,
+    "description": "Set this option to `true` to allow the DHCP server to find out if an IP address is already in use to prevent IP address conflict when some of the devices on the network have manually configured IP addresses."
+   },
+   {
+    "name": "pingCheckTimeout",
+    "optional": true,
+    "description": "The timeout interval to wait for an ping reply."
+   },
+   {
+    "name": "pingCheckRetries",
+    "optional": true,
+    "description": "The maximum number of ping requests to try."
+   },
+   {
+    "name": "domainName",
+    "optional": true,
+    "description": "The domain name to be used by this network. The DHCP server automatically adds forward and reverse DNS entries for each IP address allocations when domain name is configured. (Option 15)"
+   },
+   {
+    "name": "domainSearchList",
+    "optional": true,
+    "description": "A comma separated list of domain names that the clients can use as a suffix when searching a domain name. (Option 119)"
+   },
+   {
+    "name": "dnsUpdates",
+    "optional": true,
+    "description": "Set this option to `true` to allow the DHCP server to automatically update forward and reverse DNS entries for clients."
+   },
+   {
+    "name": "dnsOverwriteForDynamicLease",
+    "optional": true,
+    "description": "Set this option to `true` to allow the DHCP server to overwrite existing DNS A record matching the client domain name for dynamic leases."
+   },
+   {
+    "name": "dnsTtl",
+    "optional": true,
+    "description": "The TTL value used for forward and reverse DNS records."
+   },
+   {
+    "name": "serverAddress",
+    "optional": true,
+    "description": "The IP address of next server (TFTP) to use in bootstrap by the clients. If not specified, the DHCP server's IP address is used. (siaddr)"
+   },
+   {
+    "name": "serverHostName",
+    "optional": true,
+    "description": "The optional bootstrap server host name to be used by the clients to identify the TFTP server. (sname/Option 66)"
+   },
+   {
+    "name": "bootFileName",
+    "optional": true,
+    "description": "The boot file name stored on the bootstrap TFTP server to be used by the clients. (file/Option 67)"
+   },
+   {
+    "name": "routerAddress",
+    "optional": true,
+    "description": "The default gateway IP address to be used by the clients. (Option 3)"
+   },
+   {
+    "name": "useThisDnsServer",
+    "optional": true,
+    "description": "Tells the DHCP server to use this DNS server's IP address to configure the DNS Servers DHCP option for clients."
+   },
+   {
+    "name": "dnsServers",
+    "optional": true,
+    "description": "A comma separated list of DNS server IP addresses to be used by the clients. This parameter is ignored when `useThisDnsServer` is set to `true`. (Option 6)"
+   },
+   {
+    "name": "winsServers",
+    "optional": true,
+    "description": "A comma separated list of NBNS/WINS server IP addresses to be used by the clients. (Option 44)"
+   },
+   {
+    "name": "ntpServers",
+    "optional": true,
+    "description": "A comma separated list of Network Time Protocol (NTP) server IP addresses to be used by the clients. (Option 42)"
+   },
+   {
+    "name": "ntpServerDomainNames",
+    "optional": true,
+    "description": "Enter NTP server domain names (e.g. pool.ntp.org) above that the DHCP server should automatically resolve and pass the resolved IP addresses to clients as NTP server option. (Option 42)"
+   },
+   {
+    "name": "staticRoutes",
+    "optional": true,
+    "description": "A `|` separated list of static routes in format `{destination network address}|{subnet mask}|{router/gateway address}` to be used by the clients for accessing specified destination networks. (Option 121)"
+   },
+   {
+    "name": "vendorInfo",
+    "optional": true,
+    "description": "A `|` separated list of vendor information in format `{vendor class identifier}|{vendor specific information}` where `{vendor specific information}` is a colon separated hex string or a normal hex string."
+   },
+   {
+    "name": "capwapAcIpAddresses",
+    "optional": true,
+    "description": "A comma separated list of Control And Provisioning of Wireless Access Points (CAPWAP) Access Controller IP addresses to be used by Wireless Termination Points to discover the Access Controllers to which it is to connect."
+   },
+   {
+    "name": "tftpServerAddresses",
+    "optional": true,
+    "description": "A comma separated list of TFTP Server Address or the VoIP Configuration Server Address. (Option 150)"
+   },
+   {
+    "name": "genericOptions",
+    "optional": true,
+    "description": "This feature allows you to define DHCP options that are not yet directly supported. Use a `|` separated list of DHCP option code defined for it and the value in either a colon (:) separated hex string or a normal hex str"
+   },
+   {
+    "name": "exclusions",
+    "optional": true,
+    "description": "A `|` separated list of IP address range in format `{starting address}|{ending address}` that must be excluded or not assigned dynamically to any client by the DHCP server."
+   },
+   {
+    "name": "reservedLeases",
+    "optional": true,
+    "description": "A `|` separated list of reserved IP addresses in format `{host name}|{MAC address}|{reserved IP address}|{comments}` to be assigned to specific clients based on their MAC address."
+   },
+   {
+    "name": "allowOnlyReservedLeases",
+    "optional": true,
+    "description": "Set this parameter to `true` to stop dynamic IP address allocation and allocate only reserved IP addresses."
+   },
+   {
+    "name": "blockLocallyAdministeredMacAddresses",
+    "optional": true,
+    "description": "Set this parameter to `true` to stop dynamic IP address allocation for clients with locally administered MAC addresses. MAC address with 0x02 bit set in the first octet indicate a locally administered MAC address which u"
+   },
+   {
+    "name": "ignoreClientIdentifierOption",
+    "optional": true,
+    "description": "Set this parameter to `true` to always use the client's MAC address as the identifier to allocate lease instead of the Client Identifier (Option 61) provided by the client in the request. Changing this option may cause t"
+   }
+  ]
+ },
+ {
+  "group": "DHCP API Calls",
+  "title": "Add Reserved Lease",
+  "path": "/api/dhcp/scopes/addReservedLease",
+  "permission": "DhcpServer: Modify",
+  "params": [
+   {
+    "name": "name",
+    "optional": false,
+    "description": "The name of the DHCP scope."
+   },
+   {
+    "name": "hardwareAddress",
+    "optional": false,
+    "description": "The MAC address of the client."
+   },
+   {
+    "name": "ipAddress",
+    "optional": false,
+    "description": "The reserved IP address for the client."
+   },
+   {
+    "name": "hostName",
+    "optional": true,
+    "description": "The hostname of the client to override."
+   },
+   {
+    "name": "comments",
+    "optional": true,
+    "description": "Comments for the reserved lease entry."
+   }
+  ]
+ },
+ {
+  "group": "DHCP API Calls",
+  "title": "Remove Reserved Lease",
+  "path": "/api/dhcp/scopes/removeReservedLease",
+  "permission": "DhcpServer: Modify",
+  "params": [
+   {
+    "name": "name",
+    "optional": false,
+    "description": "The name of the DHCP scope."
+   },
+   {
+    "name": "hardwareAddress",
+    "optional": false,
+    "description": "The MAC address of the client."
+   }
+  ]
+ },
+ {
+  "group": "DHCP API Calls",
+  "title": "Enable DHCP Scope",
+  "path": "/api/dhcp/scopes/enable",
+  "permission": "DhcpServer: Modify",
+  "params": [
+   {
+    "name": "name",
+    "optional": false,
+    "description": "The name of the DHCP scope."
+   }
+  ]
+ },
+ {
+  "group": "DHCP API Calls",
+  "title": "Disable DHCP Scope",
+  "path": "/api/dhcp/scopes/disable",
+  "permission": "DhcpServer: Modify",
+  "params": [
+   {
+    "name": "name",
+    "optional": false,
+    "description": "The name of the DHCP scope."
+   }
+  ]
+ },
+ {
+  "group": "DHCP API Calls",
+  "title": "Delete DHCP Scope",
+  "path": "/api/dhcp/scopes/delete",
+  "permission": "DhcpServer: Delete",
+  "params": [
+   {
+    "name": "name",
+    "optional": false,
+    "description": "The name of the DHCP scope."
+   }
+  ]
+ },
+ {
+  "group": "Administration API Calls",
+  "title": "List Sessions",
+  "path": "/api/admin/sessions/list",
+  "permission": "Administration: View",
+  "params": []
+ },
+ {
+  "group": "Administration API Calls",
+  "title": "Create API Token",
+  "path": "/api/admin/sessions/createToken",
+  "permission": "Administration: Modify",
+  "params": [
+   {
+    "name": "user",
+    "optional": false,
+    "description": "The username for the user account for which to generate the API token."
+   },
+   {
+    "name": "tokenName",
+    "optional": false,
+    "description": "The name of the created token to identify its session."
+   }
+  ]
+ },
+ {
+  "group": "Administration API Calls",
+  "title": "Delete Session",
+  "path": "/api/admin/sessions/delete",
+  "permission": "Administration: Delete",
+  "params": [
+   {
+    "name": "partialToken",
+    "optional": false,
+    "description": "The partial token of the session to delete that was returned by the list of sessions."
+   }
+  ]
+ },
+ {
+  "group": "Administration API Calls",
+  "title": "List Users",
+  "path": "/api/admin/users/list",
+  "permission": "Administration: View",
+  "params": []
+ },
+ {
+  "group": "Administration API Calls",
+  "title": "Create User",
+  "path": "/api/admin/users/create",
+  "permission": "Administration: Modify",
+  "params": [
+   {
+    "name": "user",
+    "optional": false,
+    "description": "A unique username for the user account."
+   },
+   {
+    "name": "pass",
+    "optional": false,
+    "description": "A password for the user account."
+   },
+   {
+    "name": "displayName",
+    "optional": true,
+    "description": "The display name for the user account."
+   }
+  ]
+ },
+ {
+  "group": "Administration API Calls",
+  "title": "Get User Details",
+  "path": "/api/admin/users/get",
+  "permission": "Administration: View",
+  "params": [
+   {
+    "name": "user",
+    "optional": false,
+    "description": "The username for the user account."
+   },
+   {
+    "name": "includeGroups",
+    "optional": true,
+    "description": "Set `true` to include a list of groups in response."
+   }
+  ]
+ },
+ {
+  "group": "Administration API Calls",
+  "title": "Set User Details",
+  "path": "/api/admin/users/set",
+  "permission": "Administration: Modify",
+  "params": [
+   {
+    "name": "user",
+    "optional": false,
+    "description": "The username for the user account."
+   },
+   {
+    "name": "displayName",
+    "optional": true,
+    "description": "The display name for the user account. For SSO users, the display name is managed by SSO provider and cannot be changed with this API call."
+   },
+   {
+    "name": "newUser",
+    "optional": true,
+    "description": "A new username for renaming the username for the user account. For SSO users, the username is managed by SSO provider and cannot be changed with this API call."
+   },
+   {
+    "name": "totpEnabled",
+    "optional": true,
+    "description": "Set to `false` to disable 2FA for the user account. The parameter cannot have a `true` value. For SSO users, 2FA is managed by SSO provider and cannot be enabled with this API call."
+   },
+   {
+    "name": "disabled",
+    "optional": true,
+    "description": "Set `true` to disable the user account and delete all its active sessions."
+   },
+   {
+    "name": "sessionTimeoutSeconds",
+    "optional": true,
+    "description": "A session time out value in seconds for the user account."
+   },
+   {
+    "name": "newPass",
+    "optional": true,
+    "description": "A new password to reset the user account password. For SSO users, the password is managed by SSO provider and cannot be changed with this API call."
+   },
+   {
+    "name": "iterations",
+    "optional": true,
+    "description": "The number of iterations for PBKDF2 SHA256 password hashing. This is only used with the `newPass` option."
+   },
+   {
+    "name": "memberOfGroups",
+    "optional": true,
+    "description": "A list of comma separated group names that the user must be set as a member. For SSO users, the group membership is managed by SSO provider if SSO Group Map was configured and cannot be changed with this API call in that"
+   }
+  ]
+ },
+ {
+  "group": "Administration API Calls",
+  "title": "Delete User",
+  "path": "/api/admin/users/delete",
+  "permission": "Administration: Delete",
+  "params": [
+   {
+    "name": "user",
+    "optional": false,
+    "description": "The username for the user account to delete."
+   }
+  ]
+ },
+ {
+  "group": "Administration API Calls",
+  "title": "List Groups",
+  "path": "/api/admin/groups/list",
+  "permission": "Administration: View",
+  "params": []
+ },
+ {
+  "group": "Administration API Calls",
+  "title": "Create Group",
+  "path": "/api/admin/groups/create",
+  "permission": "Administration: Modify",
+  "params": [
+   {
+    "name": "group",
+    "optional": false,
+    "description": "The name of the group to create."
+   },
+   {
+    "name": "description",
+    "optional": true,
+    "description": "The description text for the group."
+   }
+  ]
+ },
+ {
+  "group": "Administration API Calls",
+  "title": "Get Group Details",
+  "path": "/api/admin/groups/get",
+  "permission": "Administration: View",
+  "params": [
+   {
+    "name": "group",
+    "optional": false,
+    "description": "The name of the group."
+   },
+   {
+    "name": "includeUsers",
+    "optional": true,
+    "description": "Set `true` to include a list of users in response."
+   }
+  ]
+ },
+ {
+  "group": "Administration API Calls",
+  "title": "Set Group Details",
+  "path": "/api/admin/groups/set",
+  "permission": "Administration: Modify",
+  "params": [
+   {
+    "name": "group",
+    "optional": false,
+    "description": "The name of the group to update."
+   },
+   {
+    "name": "newGroup",
+    "optional": true,
+    "description": "A new group name to rename the group."
+   },
+   {
+    "name": "description",
+    "optional": true,
+    "description": "A new group description."
+   },
+   {
+    "name": "members",
+    "optional": true,
+    "description": "A comma separated list of usernames to set as the group's members."
+   }
+  ]
+ },
+ {
+  "group": "Administration API Calls",
+  "title": "Delete Group",
+  "path": "/api/admin/groups/delete",
+  "permission": "Administration: Delete",
+  "params": [
+   {
+    "name": "group",
+    "optional": false,
+    "description": "The name of the group to delete."
+   }
+  ]
+ },
+ {
+  "group": "Administration API Calls",
+  "title": "List Permissions",
+  "path": "/api/admin/permissions/list",
+  "permission": "Administration: View",
+  "params": []
+ },
+ {
+  "group": "Administration API Calls",
+  "title": "Get Permission Details",
+  "path": "/api/admin/permissions/get",
+  "permission": "Administration: View",
+  "params": [
+   {
+    "name": "section",
+    "optional": false,
+    "description": "The name of the section as given in the list of permissions API call."
+   },
+   {
+    "name": "includeUsersAndGroups",
+    "optional": true,
+    "description": "Set to `true` to include a list of users and groups in the response."
+   }
+  ]
+ },
+ {
+  "group": "Administration API Calls",
+  "title": "Set Permission Details",
+  "path": "/api/admin/permissions/set",
+  "permission": "Administration: Delete",
+  "params": [
+   {
+    "name": "section",
+    "optional": false,
+    "description": "The name of the section as given in the list of permissions API call."
+   },
+   {
+    "name": "userPermissions",
+    "optional": true,
+    "description": "A pipe `|` separated table data with each row containing username and boolean values for the view, modify and delete permissions. For example: user1|true|true|true|user2|true|false|false"
+   },
+   {
+    "name": "groupPermissions",
+    "optional": true,
+    "description": "A pipe `|` separated table data with each row containing the group name and boolean values for the view, modify and delete permissions. For example: group1|true|true|true|group2|true|true|false"
+   }
+  ]
+ },
+ {
+  "group": "Administration API Calls",
+  "title": "Get SSO Config",
+  "path": "/api/admin/sso/get",
+  "permission": "Administration: View",
+  "params": [
+   {
+    "name": "includeGroups",
+    "optional": true,
+    "description": "Set to `true` to include a list of local groups."
+   }
+  ]
+ },
+ {
+  "group": "Administration API Calls",
+  "title": "Set SSO Config",
+  "path": "/api/admin/sso/set",
+  "permission": "Administration: Delete",
+  "params": [
+   {
+    "name": "ssoEnabled",
+    "optional": true,
+    "description": "Set to `true` to allow Single Sign-On (SSO) with OpenID Connect (OIDC)."
+   },
+   {
+    "name": "ssoAuthority",
+    "optional": true,
+    "description": "The OpenID Connect (OIDC) Authority URL."
+   },
+   {
+    "name": "ssoClientId",
+    "optional": true,
+    "description": "The OpenID Connect (OIDC) Client ID."
+   },
+   {
+    "name": "ssoClientSecret",
+    "optional": true,
+    "description": "The OpenID Connect (OIDC) Client Secret."
+   },
+   {
+    "name": "ssoMetadataAddress",
+    "optional": true,
+    "description": "The OpenID Connect (OIDC) metadata discovery URL to be used instead of the default one. Configure this option only if the Single Sign-On (SSO) provider uses a different discovery URL."
+   },
+   {
+    "name": "ssoAllowSignup",
+    "optional": true,
+    "description": "Set to `true` to allow automatically provisioning of user accounts for new users signing in via Single Sign-On (SSO). Keep this option set to `false` if you do not expect new SSO users to sign up."
+   },
+   {
+    "name": "ssoAllowSignupOnlyForMappedUsers",
+    "optional": true,
+    "description": "Set to `true` to allow a new user to sign up via Single Sign-On (SSO) only when the user is a member of at least one Remote Group that is mapped to a Local Group in the Group Map option below. This option allows SSO admi"
+   },
+   {
+    "name": "ssoGroupMap",
+    "optional": true,
+    "description": "A pipe `|` separated table data with each row containing Remote Group name and a corresponding Local Group name. Maps Remote Groups at Single Sign-On (SSO) provider to Local Groups for both new and existing users signed "
+   }
+  ]
+ },
+ {
+  "group": "Administration API Calls",
+  "title": "Create SSO User",
+  "path": "/api/admin/sso/users/create",
+  "permission": "Administration: Modify",
+  "params": [
+   {
+    "name": "user",
+    "optional": false,
+    "description": "The SSO user account's username."
+   },
+   {
+    "name": "displayName",
+    "optional": true,
+    "description": "The SSO user account's display name."
+   },
+   {
+    "name": "ssoIdentifier",
+    "optional": false,
+    "description": "The SSO identifier received from the SSO provider."
+   },
+   {
+    "name": "memberOfGroups",
+    "optional": true,
+    "description": "A list of comma separated group names that the SSO user must be set as a member."
+   }
+  ]
+ },
+ {
+  "group": "Administration API Calls",
+  "title": "Set SSO User",
+  "path": "/api/admin/sso/users/set",
+  "permission": "Administration: Modify",
+  "params": [
+   {
+    "name": "user",
+    "optional": false,
+    "description": "The SSO user account's username."
+   },
+   {
+    "name": "newUser",
+    "optional": true,
+    "description": "The new username for the SSO user account."
+   },
+   {
+    "name": "displayName",
+    "optional": true,
+    "description": "The SSO user account's display name."
+   },
+   {
+    "name": "memberOfGroups",
+    "optional": true,
+    "description": "A list of comma separated group names that the SSO user must be set as a member."
+   }
+  ]
+ },
+ {
+  "group": "Administration API Calls",
+  "title": "Get Cluster State",
+  "path": "/api/admin/cluster/state",
+  "permission": "Administration: View",
+  "params": [
+   {
+    "name": "includeServerIpAddresses",
+    "optional": true,
+    "description": "Set to `true` to return a list of static IP addresses configured on the server. Default value is `false` when the parameter is missing."
+   }
+  ]
+ },
+ {
+  "group": "Administration API Calls",
+  "title": "Initialize Cluster",
+  "path": "/api/admin/cluster/init",
+  "permission": "Administration: Delete",
+  "params": [
+   {
+    "name": "clusterDomain",
+    "optional": false,
+    "description": "The fully qualified domain name to be used to identify the new Cluster."
+   },
+   {
+    "name": "primaryNodeIpAddresses",
+    "optional": false,
+    "description": "A comma separated list of IP addresses of this DNS server that will be accessible by all other DNS Servers to be added later as Secondary nodes."
+   }
+  ]
+ },
+ {
+  "group": "Administration API Calls",
+  "title": "Delete Cluster",
+  "path": "/api/admin/cluster/primary/delete",
+  "permission": "Administration: Delete",
+  "params": [
+   {
+    "name": "forceDelete",
+    "optional": true,
+    "description": "Set to `true` to cause this Primary node to delete the Cluster for itself even when other Secondary nodes still exist, orphaning them. Default value is `false` when the parameter is missing."
+   }
+  ]
+ },
+ {
+  "group": "Administration API Calls",
+  "title": "Join Cluster",
+  "path": "/api/admin/cluster/primary/join",
+  "permission": "Administration: Delete",
+  "params": [
+   {
+    "name": "secondaryNodeId",
+    "optional": false,
+    "description": "The Secondary node ID that was generated randomly when the server is initializing as a Secondary node."
+   },
+   {
+    "name": "secondaryNodeUrl",
+    "optional": false,
+    "description": "The HTTPS URL of the Secondary node's API web service."
+   },
+   {
+    "name": "secondaryNodeIpAddresses",
+    "optional": false,
+    "description": "A comma separated list of Secondary node IP addresses."
+   },
+   {
+    "name": "secondaryNodeCertificate",
+    "optional": false,
+    "description": "The Secondary node's TLS certificate used by the API web service."
+   }
+  ]
+ },
+ {
+  "group": "Administration API Calls",
+  "title": "Remove Secondary Node",
+  "path": "/api/admin/cluster/primary/removeSecondary",
+  "permission": "Administration: Delete",
+  "params": [
+   {
+    "name": "secondaryNodeId",
+    "optional": false,
+    "description": "The Secondary node ID which needs to be asked to leave the Cluster."
+   }
+  ]
+ },
+ {
+  "group": "Administration API Calls",
+  "title": "Delete Secondary Node",
+  "path": "/api/admin/cluster/primary/deleteSecondary",
+  "permission": "Administration: Delete",
+  "params": [
+   {
+    "name": "secondaryNodeId",
+    "optional": false,
+    "description": "The Secondary node ID which must be deleted from the Cluster immediately."
+   }
+  ]
+ },
+ {
+  "group": "Administration API Calls",
+  "title": "Update Secondary Node",
+  "path": "/api/admin/cluster/primary/updateSecondary",
+  "permission": "Administration: Delete",
+  "params": [
+   {
+    "name": "secondaryNodeId",
+    "optional": false,
+    "description": "The Secondary node ID that identifies the node."
+   },
+   {
+    "name": "secondaryNodeUrl",
+    "optional": false,
+    "description": "The HTTPS API web service URL of the Secondary node to be updated."
+   },
+   {
+    "name": "secondaryNodeIpAddresses",
+    "optional": false,
+    "description": "A comma separated list of IP addresses of the Secondary node to be updated."
+   },
+   {
+    "name": "secondaryNodeCertificate",
+    "optional": false,
+    "description": "The web service TLS certificate encoded in Base64 URL format."
+   }
+  ]
+ },
+ {
+  "group": "Administration API Calls",
+  "title": "Transfer Config",
+  "path": "/api/admin/cluster/primary/transferConfig",
+  "permission": "Administration: Delete",
+  "params": [
+   {
+    "name": "includeZones",
+    "optional": true,
+    "description": "A list of comma separated domain names of the zones that should be included to transfer DNSSEC private keys."
+   }
+  ]
+ },
+ {
+  "group": "Administration API Calls",
+  "title": "Set Cluster Options",
+  "path": "/api/admin/cluster/primary/setOptions",
+  "permission": "Administration: Modify",
+  "params": [
+   {
+    "name": "heartbeatRefreshIntervalSeconds",
+    "optional": true,
+    "description": "The interval in seconds in which the DNS server must refresh the state of all nodes in the Cluster. The valid range is `10`-`300` and default value is `30`."
+   },
+   {
+    "name": "heartbeatRetryIntervalSeconds",
+    "optional": true,
+    "description": "The interval in seconds in which the DNS server must retry the state refresh process for all nodes in case of a failure. The valid range is `10`-`300` and default value is `10`."
+   },
+   {
+    "name": "configRefreshIntervalSeconds",
+    "optional": true,
+    "description": "The interval in seconds in which the DNS server must refresh the configuration from the Primary node. The valid range is `30`-`3600` and default value is `900`."
+   },
+   {
+    "name": "configRetryIntervalSeconds",
+    "optional": true,
+    "description": "The interval in seconds in which the DNS server must retry the configuration refresh process for the Primary node in case of a failure. The valid range is `30`-`3600` and default value is `60`."
+   }
+  ]
+ },
+ {
+  "group": "Administration API Calls",
+  "title": "Initialize And Join Cluster",
+  "path": "/api/admin/cluster/initJoin",
+  "permission": "Administration: Delete",
+  "params": [
+   {
+    "name": "secondaryNodeIpAddresses",
+    "optional": false,
+    "description": "A comma separated list of IP addresses of this DNS server that will be accessible by all other DNS Server nodes in the Cluster."
+   },
+   {
+    "name": "primaryNodeUrl",
+    "optional": false,
+    "description": "The web service HTTPS URL of the Primary node in the Cluster."
+   },
+   {
+    "name": "primaryNodeIpAddress",
+    "optional": true,
+    "description": "The IP address of the Primary node in the Cluster. When unspecified, domain name in the Primary node URL will be resolved and used."
+   },
+   {
+    "name": "ignoreCertificateErrors",
+    "optional": true,
+    "description": "Set to `true` only when you know that the Primary node web service is using a self-signed TLS certificate and is reachable on a private network."
+   },
+   {
+    "name": "primaryNodeUsername",
+    "optional": false,
+    "description": "The username of an administrator on the Primary node in the Cluster."
+   },
+   {
+    "name": "primaryNodePassword",
+    "optional": false,
+    "description": "The password of the administrator user specified above."
+   },
+   {
+    "name": "primaryNodeTotp",
+    "optional": true,
+    "description": "The the 6-digit code you see in your authenticator app for the administrator user specified above. Only to be used if the user has 2FA enabled."
+   }
+  ]
+ },
+ {
+  "group": "Administration API Calls",
+  "title": "Leave Cluster",
+  "path": "/api/admin/cluster/secondary/leave",
+  "permission": "Administration: Delete",
+  "params": [
+   {
+    "name": "forceLeave",
+    "optional": true,
+    "description": "Set to `true` to make this Secondary node to leave the Cluster without informing the Primary node."
+   }
+  ]
+ },
+ {
+  "group": "Administration API Calls",
+  "title": "Notify",
+  "path": "/api/admin/cluster/secondary/notify",
+  "permission": "Administration: Delete",
+  "params": [
+   {
+    "name": "primaryNodeId",
+    "optional": false,
+    "description": "The calling Primary node's ID to allow identification at the Secondary node."
+   },
+   {
+    "name": "primaryNodeUrl",
+    "optional": false,
+    "description": "The calling Primary node's API web service URL."
+   },
+   {
+    "name": "primaryNodeIpAddresses",
+    "optional": false,
+    "description": "A comma separated list of the calling Primary node's IP addresses."
+   }
+  ]
+ },
+ {
+  "group": "Administration API Calls",
+  "title": "Resync Cluster",
+  "path": "/api/admin/cluster/secondary/resync",
+  "permission": "Administration: Modify",
+  "params": []
+ },
+ {
+  "group": "Administration API Calls",
+  "title": "Update Primary Node",
+  "path": "/api/admin/cluster/secondary/updatePrimary",
+  "permission": "Administration: Modify",
+  "params": [
+   {
+    "name": "primaryNodeUrl",
+    "optional": false,
+    "description": "The web service HTTPS URL of the Primary node in the Cluster."
+   },
+   {
+    "name": "primaryNodeIpAddresses",
+    "optional": true,
+    "description": "The IP address of the Primary node in the Cluster. When unspecified, domain name in the Primary node URL will be resolved and used."
+   }
+  ]
+ },
+ {
+  "group": "Administration API Calls",
+  "title": "Promote To Primary",
+  "path": "/api/admin/cluster/secondary/promote",
+  "permission": "Administration: Delete",
+  "params": [
+   {
+    "name": "forceDeletePrimary",
+    "optional": true,
+    "description": "Set to `true` for the current Primary node to be deleted from the Cluster without resyncing complete configuration from it and without inform it."
+   }
+  ]
+ },
+ {
+  "group": "Administration API Calls",
+  "title": "Update Node IP Addresses",
+  "path": "/api/admin/cluster/updateIpAddress",
+  "permission": "Administration: Modify",
+  "params": [
+   {
+    "name": "ipAddresses",
+    "optional": false,
+    "description": "A comma separated list of IP addresses to be updated for the current node."
+   }
+  ]
+ },
+ {
+  "group": "Log API Calls",
+  "title": "List Logs",
+  "path": "/api/logs/list",
+  "permission": "Logs: View",
+  "params": []
+ },
+ {
+  "group": "Log API Calls",
+  "title": "Download Log",
+  "path": "/api/logs/download",
+  "permission": "Logs: View",
+  "params": [
+   {
+    "name": "fileName",
+    "optional": false,
+    "description": "The `fileName` returned by the List Logs API call."
+   },
+   {
+    "name": "limit",
+    "optional": true,
+    "description": "The limit of number of mega bytes to download the log file. Default value is `0` when parameter is missing which indicates there is no limit."
+   }
+  ]
+ },
+ {
+  "group": "Log API Calls",
+  "title": "Delete Log",
+  "path": "/api/logs/delete",
+  "permission": "Logs: Delete",
+  "params": [
+   {
+    "name": "log",
+    "optional": false,
+    "description": "The `fileName` returned by the List Logs API call."
+   }
+  ]
+ },
+ {
+  "group": "Log API Calls",
+  "title": "Delete All Logs",
+  "path": "/api/logs/deleteAll",
+  "permission": "Logs: Delete",
+  "params": []
+ },
+ {
+  "group": "Log API Calls",
+  "title": "Query Logs",
+  "path": "/api/logs/query",
+  "permission": "Logs: View",
+  "params": [
+   {
+    "name": "name",
+    "optional": false,
+    "description": "The name of the installed DNS app."
+   },
+   {
+    "name": "classPath",
+    "optional": false,
+    "description": "The class path of the DNS app."
+   },
+   {
+    "name": "pageNumber",
+    "optional": true,
+    "description": "The page number of the data set to retrieve."
+   },
+   {
+    "name": "entriesPerPage",
+    "optional": true,
+    "description": "The number of entries per page."
+   },
+   {
+    "name": "descendingOrder",
+    "optional": true,
+    "description": "Orders the selected data set in descending order."
+   },
+   {
+    "name": "start",
+    "optional": true,
+    "description": "The start date time in ISO 8601 format to filter the logs."
+   },
+   {
+    "name": "end",
+    "optional": true,
+    "description": "The end date time in ISO 8601 format to filter the logs."
+   },
+   {
+    "name": "clientIpAddress",
+    "optional": true,
+    "description": "The client IP address to filter the logs."
+   },
+   {
+    "name": "protocol",
+    "optional": true,
+    "description": "The DNS transport protocol to filter the logs. Valid values are [`Udp`, `Tcp`, `Tls`, `Https`, `Quic`]."
+   },
+   {
+    "name": "responseType",
+    "optional": true,
+    "description": "The DNS server response type to filter the logs. Valid values are [`Authoritative`, `Recursive`, `Cached`, `Blocked`, `UpstreamBlocked`, `CacheBlocked`]."
+   },
+   {
+    "name": "rcode",
+    "optional": true,
+    "description": "The DNS response code to filter the logs."
+   },
+   {
+    "name": "qname",
+    "optional": true,
+    "description": "The query name (QNAME) in the request question section to filter the logs."
+   },
+   {
+    "name": "qtype",
+    "optional": true,
+    "description": "The DNS resource record type (QTYPE) in the request question section to filter the logs."
+   },
+   {
+    "name": "qclass",
+    "optional": true,
+    "description": "The DNS class (QCLASS) in the request question section to filter the logs."
+   }
+  ]
+ },
+ {
+  "group": "Log API Calls",
+  "title": "Export Query Logs",
+  "path": "/api/logs/export",
+  "permission": "Logs: View",
+  "params": [
+   {
+    "name": "name",
+    "optional": false,
+    "description": "The name of the installed DNS app."
+   },
+   {
+    "name": "classPath",
+    "optional": false,
+    "description": "The class path of the DNS app."
+   },
+   {
+    "name": "start",
+    "optional": true,
+    "description": "The start date time in ISO 8601 format to filter the logs."
+   },
+   {
+    "name": "end",
+    "optional": true,
+    "description": "The end date time in ISO 8601 format to filter the logs."
+   },
+   {
+    "name": "clientIpAddress",
+    "optional": true,
+    "description": "The client IP address to filter the logs."
+   },
+   {
+    "name": "protocol",
+    "optional": true,
+    "description": "The DNS transport protocol to filter the logs. Valid values are [`Udp`, `Tcp`, `Tls`, `Https`, `Quic`]."
+   },
+   {
+    "name": "responseType",
+    "optional": true,
+    "description": "The DNS server response type to filter the logs. Valid values are [`Authoritative`, `Recursive`, `Cached`, `Blocked`, `UpstreamBlocked`, `CacheBlocked`]."
+   },
+   {
+    "name": "rcode",
+    "optional": true,
+    "description": "The DNS response code to filter the logs."
+   },
+   {
+    "name": "qname",
+    "optional": true,
+    "description": "The query name (QNAME) in the request question section to filter the logs."
+   },
+   {
+    "name": "qtype",
+    "optional": true,
+    "description": "The DNS resource record type (QTYPE) in the request question section to filter the logs."
+   },
+   {
+    "name": "qclass",
+    "optional": true,
+    "description": "The DNS class (QCLASS) in the request question section to filter the logs."
+   }
+  ]
+ }
+]

@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "technitium-dns": {
+      "command": "uvx",
+      "args": ["--from", "D:\\GitHub-Projects\\technitium-mcp", "technitium-mcp"],
+      "env": {
+        "TECHNITIUM_URL": "http://172.16.90.10:5380",
+        "TECHNITIUM_TOKEN": "PUT-YOUR-TOKEN-HERE-IN-THIS-FILE-ONLY"
+      }
+    }
+  }
+}
