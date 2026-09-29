@@ -1,5 +1,10 @@
 # Changelog
 
+## 2026.09.28.02
+
+- Fix: the tool closed right after starting. The install rule allowed the
+  new mcp version 2, which renamed FastMCP. Now pinned to mcp below version 2.
+
 ## 2026.09.28.01
 
 - First release.

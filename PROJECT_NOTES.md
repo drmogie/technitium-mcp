@@ -21,3 +21,17 @@
 - Not built: file uploads (import, restore, install from file).
 - GitHub repo: NOT created yet. Waiting on Mogie for the repo name
   (suggested: technitium-mcp).
+
+## 2026-09-28: startup failure fix (2026.09.28.02)
+
+- Symptom: Claude desktop showed technitium-dns as "retrying", error
+  "Connection closed" (process exited at start).
+- Cause: `mcp>=1.2` let uvx pick mcp 2.x, where `mcp.server.fastmcp`
+  no longer exists (renamed MCPServer). The cloud test box had mcp 1.27,
+  so the tests passed there. Found by launching with `uvx --from <folder>`
+  from a scratch copy and reading stderr.
+- Fix: `mcp>=1.2,<2`.
+- Lesson: test the real launch command (uvx, fresh environment), not just
+  a pre-installed environment. Claude desktop MCP logs live in
+  AppData\Roaming\Claude\logs and are not reachable from the session.
+- Later idea: port to mcp 2 (MCPServer) once it settles.

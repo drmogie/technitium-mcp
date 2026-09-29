@@ -26,7 +26,7 @@ from typing import Any
 
 from mcp.server.fastmcp import FastMCP
 
-__version__ = "2026.09.28.01"
+__version__ = "2026.09.28.02"
 
 mcp = FastMCP("technitium-dns")
 
