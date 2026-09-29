@@ -26,7 +26,7 @@ from typing import Any
 
 from mcp.server.fastmcp import FastMCP
 
-__version__ = "2026.09.28.02"
+__version__ = "2026.09.28.03"
 
 mcp = FastMCP("technitium-dns")
 
@@ -352,6 +352,101 @@ def technitium_zones(zone: str = "") -> str:
     if zone:
         return _render(_request("/api/zones/records/get", {"domain": zone, "zone": zone, "listZone": "true"}), 30000)
     return _render(_request("/api/zones/list", {}), 30000)
+
+
+# Extra record fields each record type needs, mapped to the API parameter name.
+RECORD_VALUE_PARAM = {
+    "A": "ipAddress", "AAAA": "ipAddress", "CNAME": "cname", "PTR": "ptrName",
+    "NS": "nameServer", "TXT": "text", "DNAME": "dname", "ANAME": "aname",
+}
+
+
+def _record_params(zone: str, name: str, rtype: str, value: str, ttl: int | None,
+                   preference: int | None, adding: bool) -> tuple[dict[str, Any] | None, str]:
+    """Build API parameters for a record. Returns (params, error)."""
+    rtype = rtype.upper().strip()
+    params: dict[str, Any] = {"domain": name or zone, "type": rtype}
+    if zone:
+        params["zone"] = zone
+    if rtype == "MX":
+        if not value or preference is None:
+            return None, "MX records need value (the mail server) and preference."
+        params["exchange"] = value
+        params["preference"] = preference
+    elif rtype in RECORD_VALUE_PARAM:
+        if not value:
+            return None, f"{rtype} records need a value."
+        params[RECORD_VALUE_PARAM[rtype]] = value
+    else:
+        return None, (f"{rtype} is not supported by this helper. Use technitium_call "
+                      "with /api/zones/records/add and technitium_endpoint_help.")
+    if adding and ttl is not None:
+        params["ttl"] = ttl
+    return params, ""
+
+
+@mcp.tool()
+def technitium_records(
+    action: str, zone: str, name: str = "", type: str = "A", value: str = "",
+    ttl: int | None = None, preference: int | None = None,
+    confirm: bool = False, confirm_phrase: str = "",
+) -> str:
+    """List, add or delete DNS records in a zone.
+
+    action: list, add or delete.
+    zone: the zone name, for example mogie.io.
+    name: the full record name, for example ha.mogie.io. Leave empty for the zone itself.
+    type: A, AAAA, CNAME, PTR, NS, TXT, MX, DNAME or ANAME.
+    value: the address or target (for MX, the mail server).
+    ttl: seconds (add only). preference: MX only.
+    list runs at once. add needs confirm=true after the user says yes.
+    delete needs confirm=true and confirm_phrase "/api/zones/records/delete".
+    To change a record, delete the old one and add the new one.
+    """
+    action = action.lower().strip()
+    if action == "list":
+        params = {"domain": name or zone, "zone": zone}
+        if not name:
+            params["listZone"] = "true"
+        return _render(_request("/api/zones/records/get", params), 30000)
+    if action not in ("add", "delete"):
+        return "ERROR: action must be list, add or delete."
+    params, err = _record_params(zone, name, type, value, ttl, preference, action == "add")
+    if err:
+        return "ERROR: " + err
+    path = f"/api/zones/records/{action}"
+    if action == "add":
+        params["overwrite"] = "false"
+    blocked = _gate(path, params, confirm, confirm_phrase)
+    if blocked:
+        return blocked
+    return _render(_request(path, params), 10000)
+
+
+@mcp.tool()
+def technitium_resolve(name: str, type: str = "A", server: str = "this-server") -> str:
+    """Look up a name to test DNS, for example ha.mogie.io.
+
+    server: this-server (default) asks Technitium itself. Or give another DNS
+    server address. It only reads. Note that a cached answer can be returned.
+    """
+    result = _request("/api/dnsClient/resolve", {"server": server, "domain": name, "type": type})
+    if not result.get("ok"):
+        return _render(result, 4000)
+    data = result.get("data") or {}
+    res = data.get("result", data) if isinstance(data, dict) else data
+    if not isinstance(res, dict):
+        return _render(result, 8000)
+    answers = []
+    for a in res.get("Answer", []) or []:
+        rdata = a.get("RDATA", {})
+        val = next(iter(rdata.values()), "") if isinstance(rdata, dict) else rdata
+        answers.append({"name": a.get("Name"), "type": a.get("Type"), "ttl": a.get("TTL"), "value": val})
+    return json.dumps({
+        "question": name, "type": type, "server": res.get("Metadata", {}).get("NameServer", server),
+        "result": res.get("RCODE"), "answers": answers,
+        "time": res.get("Metadata", {}).get("RoundTripTime"),
+    }, indent=1)
 
 
 def main() -> None:

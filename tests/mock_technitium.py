@@ -39,6 +39,12 @@ class H(BaseHTTPRequestHandler):
             return self._send(200, {"status": "error", "errorMessage": "Zone already exists: " + q.get("zone", "") + " token=" + GOOD})
         if u.path == "/api/settings/backup":
             return self._send(200, b"PK\x03\x04fakezip", "application/zip", {"Content-Disposition": 'attachment; filename="backup.zip"'})
+        if u.path == "/api/zones/records/get":
+            return self._send(200, {"status": "ok", "response": {"records": [{"name": "a.home.arpa", "type": "A"}]}})
+        if u.path in ("/api/zones/records/add", "/api/zones/records/delete"):
+            return self._send(200, {"status": "ok", "response": {"done": q}})
+        if u.path == "/api/dnsClient/resolve":
+            return self._send(200, {"status": "ok", "response": {"result": {"Metadata": {"NameServer": "mock (127.0.0.1)", "RoundTripTime": "1 ms"}, "RCODE": "NoError", "Answer": [{"Name": q.get("domain"), "Type": "A", "TTL": "300 (5m)", "RDATA": {"IPAddress": "10.0.0.9"}}]}}})
         if u.path == "/api/test/getBig":
             return self._send(200, {"status": "ok", "response": {"x": "a" * 50000}})
         return self._send(404, {"status": "error", "errorMessage": "nope"})

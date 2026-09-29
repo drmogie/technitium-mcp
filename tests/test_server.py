@@ -75,6 +75,25 @@ async def main():
                 out = await call(s, "technitium_call", {"endpoint": "/api/admin/users/set", "params": {"user": "x", "disabled": True}, "confirm": True})
                 ok &= check("disabling a user is risky", out.startswith("NOT RUN") and "lock" in out, out)
 
+
+                # records and lookup helpers
+                out = await call(s, "technitium_records", {"action": "list", "zone": "home.arpa"})
+                ok &= check("records list", "ERROR" not in out, out)
+                out = await call(s, "technitium_records", {"action": "add", "zone": "home.arpa", "name": "a.home.arpa", "type": "A", "value": "10.0.0.5"})
+                ok &= check("record add gated", out.startswith("NOT RUN") and "ipAddress" in out, out)
+                out = await call(s, "technitium_records", {"action": "add", "zone": "home.arpa", "name": "a.home.arpa", "type": "A", "value": "10.0.0.5", "confirm": True})
+                ok &= check("record add runs", "NOT RUN" not in out and "ERROR" not in out, out)
+                out = await call(s, "technitium_records", {"action": "delete", "zone": "home.arpa", "name": "a.home.arpa", "type": "A", "value": "10.0.0.5", "confirm": True})
+                ok &= check("record delete needs phrase", out.startswith("NOT RUN"), out)
+                out = await call(s, "technitium_records", {"action": "delete", "zone": "home.arpa", "name": "a.home.arpa", "type": "A", "value": "10.0.0.5", "confirm": True, "confirm_phrase": "/api/zones/records/delete"})
+                ok &= check("record delete runs with phrase", "NOT RUN" not in out and "ERROR" not in out, out)
+                out = await call(s, "technitium_records", {"action": "add", "zone": "home.arpa", "name": "x", "type": "MX", "value": "mail.home.arpa"})
+                ok &= check("MX needs preference", out.startswith("ERROR"), out)
+                out = await call(s, "technitium_records", {"action": "add", "zone": "home.arpa", "name": "x", "type": "SRV", "value": "y"})
+                ok &= check("unsupported type points to call", out.startswith("ERROR") and "technitium_call" in out, out)
+                out = await call(s, "technitium_resolve", {"name": "ha.home.arpa"})
+                ok &= check("resolve shows answer", '"172.16.90.75"' in out or "10.0.0.9" in out, out)
+
                 # guards
                 out = await call(s, "technitium_call", {"endpoint": "/api/user/login", "params": {"user": "a", "pass": "b"}})
                 ok &= check("login blocked", out.startswith("ERROR") and "password" in out, out)

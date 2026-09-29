@@ -14,6 +14,8 @@ It runs on your own computer. Your token stays on your computer.
 - Turn ad blocking on, off, or pause it.
 - Flush the cache and refresh block lists.
 - Change settings and zones.
+- List, add and delete DNS records (technitium_records).
+- Test a lookup (technitium_resolve).
 - Anything else in the Technitium API. 137 endpoints are in the catalog.
 
 ## Safety

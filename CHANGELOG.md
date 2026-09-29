@@ -1,5 +1,11 @@
 # Changelog
 
+## 2026.09.28.03
+
+- New tool: technitium_records. List, add and delete DNS records in a zone.
+  Adding needs confirm. Deleting also needs the endpoint path typed back.
+- New tool: technitium_resolve. Look up a name to test DNS. Read only.
+
 ## 2026.09.28.02
 
 - Fix: the tool closed right after starting. The install rule allowed the
